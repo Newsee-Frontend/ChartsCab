@@ -1,0 +1,31 @@
+@import 'mixins/mixins';
+
+body {
+  font-family: 'DIN Alternate Bold', Avenir-Heavy, PingFang SC, Helvetica Neue, Arial, sans-serif;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clear {
+  @include clearFloat;
+}
+
+@font-face {
+  font-family: 'DIN Alternate Bold';
+  src: url('../assets/iconfont/DIN.Alternate.Bold.ttf');
+}
+
+//数据块 同比环比
+.data-box {
+  .notes {
+    display: none;
+  }
+}
+
+

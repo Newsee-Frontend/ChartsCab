@@ -1,0 +1,8 @@
+/dist/
+/src/
+/mock/
+/*.js
+/test/unit/coverage/
+
+/core/
+/frametest/

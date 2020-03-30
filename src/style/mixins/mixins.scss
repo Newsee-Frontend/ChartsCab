@@ -1,0 +1,11 @@
+@mixin clearFloat {
+  zoom: 1;
+  &:after {
+    clear: both;
+  }
+  &:after,
+  &:before {
+    display: table;
+    content: '';
+  }
+}

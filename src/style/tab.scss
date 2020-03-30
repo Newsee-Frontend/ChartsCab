@@ -1,0 +1,104 @@
+$active-tab-color: #466fda;
+$active-tab-bg: #365ad4;
+$tabsHeight: 46px;
+
+.line-tab {
+  font-size: 14px;
+  .van-tabs__nav {
+    .van-tab {
+      width: auto;
+      margin-right: 12px;
+      flex: none;
+      &.van-tab--active {
+        color: $active-tab-color;
+      }
+    }
+
+    .van-tabs__line {
+      background: $active-tab-bg;
+    }
+  }
+
+  [class*='van-hairline']::after {
+    border: none;
+    border-bottom: 1px solid #ebebeb;
+  }
+}
+
+.bg-tab {
+  font-size: 16px;
+  > .van-tabs__wrap {
+    .van-tabs__nav {
+      background: #f2f4f6;
+      border-radius: 4px 4px 0 0;
+      .van-tab {
+        width: 124px;
+        flex: none;
+        color: #333333;
+        height: $tabsHeight;
+        line-height: $tabsHeight - 3px;
+        margin: 3px 0 0 3px;
+      }
+      .van-tabs__line {
+        display: none;
+      }
+      .van-tab--active {
+        background: #fff;
+        margin-top: 3px;
+        border-radius: 4px 4px 0 0;
+        font-weight: 600;
+        padding: 0 29px 0 18px;
+        &:after {
+          content: '';
+          display: block;
+          border-top: $tabsHeight solid #f2f4f6;
+          border-left: $tabsHeight/2 solid #fff;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+.bg-radius-tab {
+  font-size: 16px;
+  > .van-tabs__wrap {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    height: $tabsHeight;
+    position: relative;
+    .van-tabs__nav {
+      background: #f2f4f6;
+      .van-tab {
+        width: 90px;
+        flex: none;
+        color: #333333;
+        height: $tabsHeight;
+        line-height: $tabsHeight;
+      }
+      .van-tabs__line {
+        display: none;
+      }
+      .van-tab--active {
+        background: #fff;
+        font-weight: 600;
+        padding: 0 29px 0 18px;
+        &:after {
+          content: '';
+          display: block;
+          border-top: $tabsHeight solid #f2f4f6;
+          border-left: $tabsHeight/2 solid #fff;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+
+  [class*='van-hairline']::after {
+    border: none;
+  }
+}
