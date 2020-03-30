@@ -1,6 +1,6 @@
 <template>
   <div class="year-picker">
-    <ns-popup position="bottom" v-model="show" @close="onClose" custom-style="height: 20%">
+    <ns-popup position="bottom" v-model="showPicker" @close="onClose" custom-style="height: 20%">
       <ns-picker
         ref="yearPicker"
         :columns="columns"
@@ -11,7 +11,7 @@
         @change="changePicker"
       ></ns-picker>
     </ns-popup>
-    <div class="year-picker__value" @click="show = true">
+    <div class="year-picker__value" @click="showPicker = true">
       <slot></slot>
     </div>
   </div>
@@ -34,9 +34,9 @@
 
     data() {
       return {
-        show: false,
+        showPicker: false,
         columns: [],
-        year: '',
+        currentYear: '',
         defaultIndex: 0,
       };
     },
@@ -48,10 +48,12 @@
     watch: {
       value: {
         handler(val) {
-          this.year = val;
+          this.currentYear = val;
+
           this.$nextTick(() => {
-            this.defaultIndex = this.columns.findIndex(i => i === this.year) || 0;
+            this.defaultIndex = this.columns.findIndex(i => i === this.currentYear) || 0;
           });
+
         },
         immediate: true,
       },
@@ -59,27 +61,30 @@
 
     methods: {
       getArray() {
-        let year = new Date().getFullYear();
+        let currentYear = new Date().getFullYear();
         this.columns = Array.from({length: 50}, (v, i) => {
-          return year - i;
+          return currentYear - i;
         });
       },
 
       onClose() {
-        this.year = this.value;
-        this.$refs.yearPicker.setValues([this.year]);
-        this.show = false;
+        this.currentYear = this.value;
+        this.$refs.yearPicker.setValues([this.currentYear]);
+        this.showPicker = false;
       },
 
       changePicker(item, val) {
-        this.year = val;
+        this.currentYear = val;
       },
 
       confirm() {
-        this.show = false;
-        this.$emit('input', this.year);
-        if (this.value !== this.year) {
-          this.$emit('change', this.year);
+        this.showPicker = false;
+
+
+        this.$emit('input', this.currentYear);
+
+        if (this.value !== this.currentYear) {
+          this.$emit('change', this.currentYear);
         }
       },
     },

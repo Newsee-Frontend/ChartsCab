@@ -1,4 +1,4 @@
-import mixinsload from '../../mixins/index';
+// import mixinsload from '../../mixins/index';
 import reprefix from './reprefix';
 
 export default function (sfc) {
@@ -13,7 +13,7 @@ export default function (sfc) {
   }
 
   sfc.mixins = sfc.mixins || [];
-  sfc.mixins = [...sfc.mixins, ...mixinsload(sfc)];
+  // sfc.mixins = [...sfc.mixins, ...mixinsload(sfc)];
   sfc.methods = sfc.methods || {};
 
 

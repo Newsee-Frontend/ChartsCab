@@ -1,3 +1,5 @@
-export default sfc => {
-  return [];
+import baseQuery from './baseQuery';
+
+export default {
+  mixins: [baseQuery],
 };
