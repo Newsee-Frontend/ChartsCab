@@ -77,10 +77,6 @@ export default create({
   },
 
   methods: {
-    refresh(){
-      this.getLineData()
-    },
-
     changeSelect(val) {
       this.activeOption[this.activeType] = val;
       this.getRevenueChartData();
@@ -124,7 +120,7 @@ export default create({
   },
 
   created() {
-    this.refresh();
+    this.getLineData()
   },
 });
 </script>
