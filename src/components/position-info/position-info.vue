@@ -3,7 +3,7 @@
     <!--头部标题区域-->
     <ns-block-head>
       <template slot="main">经营指标排名</template>
-      <template slot="sub">{{`数据截止:${getTime()}`}}</template>
+      <template slot="sub">{{`截止:${getTime()}`}} </template>
     </ns-block-head>
 
     <div class="manager-block__body">
