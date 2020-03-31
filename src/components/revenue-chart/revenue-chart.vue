@@ -98,7 +98,6 @@ export default create({
       // console.log(this.lineData);
     },
     getLineData() {
-      var _this = this;
       getData([
         { targetItemID: 80, repotyType: 3, date: getAllMonths(2) },
         { targetItemID: 256, repotyType: 3, date: getAllMonths(2) },
