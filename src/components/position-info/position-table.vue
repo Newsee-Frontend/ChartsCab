@@ -4,7 +4,7 @@
       <!--表头-->
       <thead>
         <tr>
-          <th class="index" width="20px"></th>
+          <!-- <th class="index" width="20px"></th> -->
           <th v-for="column in columnList" :key="column.value">{{ column.label }}</th>
         </tr>
       </thead>
@@ -17,10 +17,9 @@
           v-show="showAll || index < defaultNum"
           @click="clickColumn(item)"
         >
-          <td class="column-index">{{ index + 1 }}</td>
-
-          <td v-for="column in columnList" :key="column.value" :class="`column-${column.value}`">
-            <div>{{ item[column.value] || 0 }}{{ column.unit === '%' ? '%' : '' }}</div>
+          <!-- <td class="column-index">{{ index + 1 }}</td> -->
+          <td v-for="(column, colIndex) in columnList" :key="column.value" :class="`column-${column.value}`">
+            <div><span class="column-index" v-show="colIndex === 0">{{ index + 1 }}</span>{{ item[column.value] || 0 }}{{ column.unit === '%' ? '%' : '' }}</div>
           </td>
         </tr>
 
@@ -105,16 +104,15 @@
       font-size:10px;
       height:32px;
       line-height: 32px;
-      tr th:nth-of-type(2){
-        text-align: left;
-        min-width: 100px;
-        width: 30%;
+      tr th:nth-of-type(1){
+        width: 40%;
       }
     }
 
     thead th,
     tbody td {
-      text-align: center;
+      padding-left: 10px;
+      text-align: left;
       word-wrap: break-word;
       word-break: break-all;
     }
@@ -132,12 +130,13 @@
 
         td{
           line-height: 20px;
-          &.column-index {
+          .column-index {
+            margin-right: 6px;
             font-weight: bold;
             color: #b2b2b2;
           }
           //区域
-          &:nth-of-type(2) {
+          &:nth-of-type(1) {
             font-weight: bold;
             color: #000;
             div{
