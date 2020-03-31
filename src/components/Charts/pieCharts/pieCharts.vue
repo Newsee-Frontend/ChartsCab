@@ -82,7 +82,7 @@ export default {
       this.chart.axis(false);
       this.chart.legend({
         position: 'right',
-        offsetX: this.isBlank ? -40 : 0,
+        offsetX: this.isBlank ? -30 : 0,
         offsetY: 6,
         marker: {
           radius: 6,

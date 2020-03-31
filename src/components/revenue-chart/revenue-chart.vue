@@ -57,16 +57,16 @@ export default create({
 
       list: {
         amount: [
-          { value: 0, label: '集团年度</br>营收趋势' },
-          { value: 1, label: '集团物业费</br>营收趋势' },
-          { value: 2, label: '集团物业费</br>清欠趋势' },
+          { value: 0, label: '年度营收</br>趋势' },
+          { value: 1, label: '物业费营收</br>趋势' },
+          { value: 2, label: '物业费清欠</br>趋势' },
         ],
         rate: [
-          { value: 3, label: '集团年度</br>营收趋势' },
-          { value: 4, label: '集团物业费</br>营收趋势' },
-          { value: 5, label: '集团物业费</br>清欠趋势' },
+          { value: 3, label: '年度营收</br>趋势' },
+          { value: 4, label: '物业费营收</br>趋势' },
+          { value: 5, label: '物业费清欠</br>趋势' },
         ],
-        area: [{ value: 6, label: '集团在管</br>面积趋势' }],
+        area: [{ value: 6, label: '在管面积</br>趋势' }],
       },
       lineData: [],
       orgData: {},
