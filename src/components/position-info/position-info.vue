@@ -3,7 +3,8 @@
     <!--头部标题区域-->
     <ns-block-head>
       <template slot="main">经营指标排名</template>
-      <template slot="sub">{{`截止:${getTime()}`}} </template>
+      <template slot="sub">{{`截止: ${getTime()}`}}</template>
+      <template slot="right">单位: 万元</template>
     </ns-block-head>
 
     <div class="manager-block__body">
@@ -144,4 +145,8 @@
   });
 </script>
 
-<style rel="stylesheet/scss" lang="scss"></style>
+<style rel="stylesheet/scss" lang="scss">
+  .manager-block{
+    margin-top: 15px;
+  }
+</style>

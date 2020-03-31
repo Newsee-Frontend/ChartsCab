@@ -29,7 +29,7 @@
       margin-right: 6px;
     }
 
-    .block-head__sub {
+    .block-head__sub, .block-head__right {
       font-size: 10px;
       font-weight: 400;
       color: rgba(102, 102, 102, 1);

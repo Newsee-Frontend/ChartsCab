@@ -3,8 +3,7 @@
   <div class="data-box" :style="{ 'background-color': back }">
     <p class="sub">{{ content.sub }}</p>
     <p class="main" :style="{ color: color }">
-      <span class="main_num" :style="{ 'font-size': convertFontSize }">{{ content.main.num }}</span>
-      <span class="main_unit">{{ content.main.unit }}</span>
+      <span class="main_num" :style="{ 'font-size': convertFontSize }">{{ content.main.num }}</span><span class="main_unit">{{ content.main.unit }}</span>
     </p>
     <p class="notes" v-if="content.notes">
       <span class="notes_compare">{{ content.notes.compare }}</span>
