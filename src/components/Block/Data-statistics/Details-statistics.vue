@@ -91,6 +91,7 @@
             targetItemID: i,
             targetLevel: 1,
             repotyType: this.isCurrentYear ? this.tabValue : 0,
+            date: this.isCurrentYear? '' : this.global_year
           });
         });
 
@@ -155,6 +156,7 @@
           targetItemID: pie_requestId,
           targetLevel: 1,
           repotyType: this.isCurrentYear ? this.tabValue : 0,
+          date: this.isCurrentYear? '' : this.global_year,
           childTargetName: 'all',
         })];
 
