@@ -1,14 +1,14 @@
 <template>
   <div class="data-statistics" style="position: relative">
     <div class="tab-line">
-      <ns-tabs class="bg-radius-tab" @change="changeTab" v-model="tabValue" v-show="year === thisYear">
+      <ns-tabs class="bg-radius-tab" @change="changeTab" v-model="tabValue" v-show="isCurrentYear">
         <ns-tab v-for="tab in tablist" :title="tab.title" :key="tab.title" :name="tab.name"></ns-tab>
       </ns-tabs>
 
       <!--时间 - 年度 选择-->
-      <ns-year-picker v-model="year" @change="changeYear">
+      <ns-year-picker>
         <div class="time-picker fr clear">
-          <div>{{ year }} 年</div>
+          <div>{{ global_year }} 年</div>
           <ns-icon name="play"></ns-icon>
         </div>
       </ns-year-picker>
@@ -16,16 +16,18 @@
       <!--头部标题区域-->
       <ns-block-head>
         <template slot="sub">
-          <div :class="year === thisYear ? '' : 'no-tab'">{{currentTimeTitle()}}</div>
+          <div :class="isCurrentYear ? '' : 'no-tab'">{{currentTimeTitle()}}</div>
         </template>
       </ns-block-head>
     </div>
 
     <div class="body-area">
       <ns-row class="content-area" gutter="5">
-        <ns-col span="8" v-for="(item, index) in finalData" :key="index">
-          <ns-data-box :content="item.content" :color="item.color" :back="item.back"></ns-data-box>
-        </ns-col>
+        <ns-skeleton row="8" :loading="!finalData.length">
+          <ns-col span="8" v-for="(item, index) in finalData" :key="index">
+            <ns-data-box :content="item.content" :color="item.color" :back="item.back"></ns-data-box>
+          </ns-col>
+        </ns-skeleton>
       </ns-row>
     </div>
 
@@ -38,19 +40,21 @@
 
 <script>
   import create from '../../../utils/core/create';
-  import {Tab, Tabs} from 'vant';
-  import pieCharts from '../../Charts/pieCharts/pieCharts'
+  import { Tab, Tabs, Skeleton } from 'vant';
+  import pieCharts from '../../Charts/pieCharts/pieCharts';
   import Mixins from './mixins';
-  import {getData} from '../../../service/fetch';
+  import baseMixin from '../../../mixins/index';
+  import { getData } from '../../../service/fetch';
 
   export default create({
     name: 'data-statistics',
 
-    mixins: [Mixins],
+    mixins: [Mixins, baseMixin],
 
     components: {
       Tabs,
       Tab,
+      Skeleton,
       pieCharts,
     },
 
@@ -58,7 +62,7 @@
       return {
         //组装入参
         ids_request: ['80', '256', '266'],
-        tablist: [{title: '本月', name: 3}, {title: '本季度', name: 2}, {title: '本年', name: 0}],
+        tablist: [{ title: '本月', name: 3 }, { title: '本季度', name: 2 }, { title: '本年', name: 0 }],
         tabValue: 3,
         thisYear: new Date().getFullYear(),
         year: new Date().getFullYear(),
@@ -67,9 +71,17 @@
       };
     },
 
+    watch: {
+      //年的修改
+      global_year() {
+        this.getRevenueData();
+      },
+    },
+
     created() {
       this.getRevenueData();
     },
+
 
     methods: {
       //获取当前条件下的数据
@@ -82,13 +94,11 @@
       getDataBox() {
         //入参
         const query = this.ids_request.map(i => {
-          return {
+          return this.getQueryByFactory({
             targetItemID: i,
             targetLevel: 1,
-            departmentID: this.departmentId,
-            repotyType: this.year === this.thisYear ? this.tabValue : 0,  //本年有季度，月份， 其他没有
-            date: this.year === this.thisYear ? '' : this.year, //all、yyyy、yyyymm
-          };
+            repotyType: this.isCurrentYear ? this.tabValue : 0,
+          });
         });
 
         getData(query).then(res => {
@@ -101,15 +111,15 @@
            * @type {*[]}
            */
           const ids_render = [
-            {id: '80', key: 'actualDenominator'},//计划总营收
-            {id: '80', key: 'actualNumerator'},//实际总营收
-            {id: '80', key: 'actualTarget'},//总营收完成率
-            {id: '256', key: 'actualDenominator'},//项目数量
-            {id: '256', key: 'actualNumerator'},//项目面积
-            {id: '256', key: 'actualTarget'},//储备面积
-            {id: '266', key: 'actualDenominator'},//项目数量
-            {id: '266', key: 'actualNumerator'},//项目面积
-            {id: '266', key: 'actualTarget'},//储备面积
+            { id: '80', key: 'actualDenominator' },//计划总营收
+            { id: '80', key: 'actualNumerator' },//实际总营收
+            { id: '80', key: 'actualTarget' },//总营收完成率
+            { id: '256', key: 'actualDenominator' },//项目数量
+            { id: '256', key: 'actualNumerator' },//项目面积
+            { id: '256', key: 'actualTarget' },//储备面积
+            { id: '266', key: 'actualDenominator' },//项目数量
+            { id: '266', key: 'actualNumerator' },//项目面积
+            { id: '266', key: 'actualTarget' },//储备面积
           ];
 
           //分段数据 - 单个数据块的数据处理
@@ -124,7 +134,7 @@
 
           console.log('最终赋值-最终赋值');
           console.log(this.finalData);
-          console.log('最终赋值-最终赋值')
+          console.log('最终赋值-最终赋值');
         });
       },
 
@@ -140,7 +150,7 @@
           return {
             content: item,
             color: colorKey ? this.palette[colorKey].color : '',
-            back: colorKey ? this.palette[colorKey].back : ''
+            back: colorKey ? this.palette[colorKey].back : '',
           };
         });
       },
@@ -148,32 +158,22 @@
       //饼图
       getPieChart() {
         const pie_requestId = 229;
-        let params = [{
+        let params = [this.getQueryByFactory({
           targetItemID: pie_requestId,
           targetLevel: 1,
-          departmentID: this.departmentId,
-          repotyType: this.year === this.thisYear ? this.tabValue : 0,  //本年有季度，月份， 其他没有
-          date: this.year === this.thisYear ? '' : this.year, //all、yyyy、yyyymm
-          childTargetName: 'all'
-        }];
-
+          repotyType: this.isCurrentYear ? this.tabValue : 0,
+          childTargetName: 'all',
+        })];
 
         getData(params).then(res => {
           this.pieData = (res[pie_requestId] || []).map(i => {
-            return {name: i.targetItem, value: i.actualTarget}
+            return { name: i.targetItem, value: i.actualTarget };
           });
-
         });
-
       },
 
       //月、季度、年的修改
       changeTab() {
-        this.getRevenueData();
-      },
-
-      //年份修改
-      changeYear() {
         this.getRevenueData();
       },
     },
@@ -202,7 +202,7 @@
       margin-top: 5px;
     }
 
-    .pie-chart-container{
+    .pie-chart-container {
       position: relative;
       padding: 16px 0;
     }

@@ -20,16 +20,13 @@
 <script>
   import {Picker, Popup} from 'vant';
   import create from '../../utils/core/create';
+  import {mapGetters} from 'vuex';
 
   export default create({
     name: 'yearPicker',
     components: {
       Picker,
       Popup,
-    },
-
-    props: {
-      value: [Number, String],
     },
 
     data() {
@@ -45,18 +42,14 @@
       this.getArray();
     },
 
+    computed: {
+      ...mapGetters(['global_year']),
+    },
+
     watch: {
-      value: {
-        handler(val) {
-          this.currentYear = val;
-
-          this.$nextTick(() => {
-            this.defaultIndex = this.columns.findIndex(i => i === this.currentYear) || 0;
-          });
-
-        },
-        immediate: true,
-      },
+      global_year(val){
+        this.currentYear = val;
+      }
     },
 
     methods: {
@@ -68,7 +61,7 @@
       },
 
       onClose() {
-        this.currentYear = this.value;
+        this.currentYear = this.global_year;
         this.$refs.yearPicker.setValues([this.currentYear]);
         this.showPicker = false;
       },
@@ -79,13 +72,7 @@
 
       confirm() {
         this.showPicker = false;
-
-
-        this.$emit('input', this.currentYear);
-
-        if (this.value !== this.currentYear) {
-          this.$emit('change', this.currentYear);
-        }
+        this.$store.dispatch('setGlobalYear', this.currentYear);
       },
     },
   });

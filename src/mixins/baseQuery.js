@@ -25,7 +25,7 @@ export default {
     },
 
     createBaseQuery() {
-
+      console.log(this.$store.state);
       const targetLevel = getUrlParam('targetLevel');
       const departmentID = getUrlParam('departmentID');
 
@@ -38,8 +38,6 @@ export default {
       };
 
       return base;
-
-
     }
   },
 };

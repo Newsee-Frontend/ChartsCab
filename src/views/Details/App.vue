@@ -1,7 +1,7 @@
 <!--详情页-->
 <template>
   <ns-layout :title="departmentName">
-    <ns-data-statistics :departmentId="departmentId"></ns-data-statistics>
+    <ns-data-statistics></ns-data-statistics>
 
     <div class="container-block">
       <!--头部标题区域-->
@@ -33,11 +33,11 @@
   import qs from 'querystring';
   import {getData} from '../../service/fetch';
   import {getRecentlyMonth, getFullYearMonth} from '../../utils/library/date'
-
-  import {getUrlParam} from '../../utils/library/urlhandle'
-
+  import baseMixin from '../../mixins/index'
   export default create({
     name: 'Details',
+
+    mixins: [ baseMixin ],
 
     components: {
       BlockHead,
@@ -48,7 +48,6 @@
     data() {
       return {
         departmentName: '',
-        departmentId: '',
 
         halfYearList: [],
         feeCollectionRateList: []
@@ -57,22 +56,8 @@
 
     created() {
       let search = location.search.slice(1);
-
-      const gcx = getUrlParam('departmentID');
-      console.log(777777777777)
-      console.log(777777777777)
-
       let params = qs.parse(search);
       this.departmentName = params.departmentName;
-      this.departmentId = params.departmentID;
-
-      console.log(search)
-      console.log(gcx)
-      console.log(this.departmentId)
-
-      console.log(777777777777)
-
-
       //获取半年营收
       this.getHalfYearIncome();
       this.getFeeCollectionRate();
@@ -82,13 +67,12 @@
       //近半年营收
       getHalfYearIncome() {
         let key = '207';
-        let params = [{
+        let params = [ this.getQueryByFactory({
           targetItemID: key,
           targetLevel: 1,
-          departmentID: this.departmentId,
           date: getRecentlyMonth(6).join(','),
           repotyType: 3  //月份
-        }];
+        })];
 
         getData(params).then(res => {
           this.halfYearList = (res[key] || []).map(i => {
@@ -103,13 +87,12 @@
         let key = '256';
         let thisYear = new Date().getFullYear();
         let date = getFullYearMonth(thisYear).concat(getFullYearMonth(thisYear - 1));
-        let params = [{
+        let params = [this.getQueryByFactory({
           targetItemID: key,
           targetLevel: 1,
-          departmentID: this.departmentId,
           date: date.join(','),
           repotyType: 3  //月份
-        }];
+        })];
 
         getData(params).then(res => {
           this.feeCollectionRateList = (res[key] || []).map(i => {

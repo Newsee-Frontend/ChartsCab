@@ -15,9 +15,11 @@
     </ns-block-head>
 
     <ns-row class="content-area" gutter="5">
-      <ns-col span="8" v-for="(item, index) in finalData" :key="index">
-        <ns-data-box :content="item.content" :color="item.color"></ns-data-box>
-      </ns-col>
+      <ns-skeleton row="6" :loading="!finalData.length">
+        <ns-col span="8" v-for="(item, index) in finalData" :key="index">
+          <ns-data-box :content="item.content" :color="item.color"></ns-data-box>
+        </ns-col>
+      </ns-skeleton>
     </ns-row>
 
 
@@ -27,11 +29,16 @@
 <script>
   import create from '../../../utils/core/create-basic';
   import Mixins from './mixins';
+  import baseMixins from '../../../mixins/index'
   import {getData} from '../../../service/fetch';
+  import { Skeleton } from 'vant';
 
   export default create({
     name: 'data-statistics',
-    mixins: [Mixins],
+    mixins: [Mixins, baseMixins],
+    components: {
+      Skeleton
+    },
     data() {
       return {
         /**
