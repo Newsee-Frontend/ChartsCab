@@ -34,8 +34,11 @@
 </template>
 
 <script>
-export default {
+  import baseMixins from '../../mixins/index';
+  export default {
   name: 'position-table',
+
+  mixins: [baseMixins],
 
   props: {
     data: {
@@ -65,7 +68,7 @@ export default {
     return {
       showAll: false,
 
-      defaultNum: 6
+      defaultNum: 6,
     };
   },
 
@@ -73,6 +76,10 @@ export default {
     clickColumn(item) {
       this.$emit('clickColumn', item);
     },
+
+    refresh(){
+      this.showAll = false
+    }
   },
 };
 </script>

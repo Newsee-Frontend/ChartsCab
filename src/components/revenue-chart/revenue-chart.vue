@@ -35,9 +35,12 @@ import { Tabs, Tab } from 'vant';
 import create from '../../utils/core/create';
 import { getData } from '../../service/fetch';
 import { getAllMonths } from '../../utils/library/date';
+import baseMixins from '../../mixins/index';
 
 export default create({
   name: 'managerIncomeChart',
+
+  mixins: [ baseMixins ],
 
   components: {
     BlockHead,
@@ -74,6 +77,10 @@ export default create({
   },
 
   methods: {
+    refresh(){
+      this.getLineData()
+    },
+
     changeSelect(val) {
       this.activeOption[this.activeType] = val;
       this.getRevenueChartData();
@@ -95,15 +102,21 @@ export default create({
         value: Number(i[index < 3 ? 'actualNumerator' : 'actualTarget']),
         type: i.date.slice(0, 4),
       }));
-      // console.log(this.lineData);
     },
+
+
     getLineData() {
-      getData([
-        { targetItemID: 80, repotyType: 3, date: getAllMonths(2) },
-        { targetItemID: 256, repotyType: 3, date: getAllMonths(2) },
-        { targetItemID: 266, repotyType: 3, date: getAllMonths(2) },
-        { targetItemID: 14, repotyType: 3, date: getAllMonths(2) },
-      ]).then(res => {
+      let ids = [80, 256, 266, 14];
+
+      let params = ids.map( i=> {
+        return this.getQueryByFactory({
+          targetItemID: i,
+          repotyType: 3,
+          date: getAllMonths(2)
+        })
+      });
+
+      getData(params).then(res => {
         this.orgData = res;
         this.changeSelect(0);
       });
@@ -111,7 +124,7 @@ export default create({
   },
 
   created() {
-    this.getLineData();
+    this.refresh();
   },
 });
 </script>

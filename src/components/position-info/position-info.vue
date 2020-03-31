@@ -3,7 +3,7 @@
     <!--头部标题区域-->
     <ns-block-head>
       <template slot="main">经营指标排名</template>
-      <template slot="sub">{{`统计数据截止:${getTime()}`}}</template>
+      <template slot="sub">{{`数据截止:${getTime()}`}}</template>
     </ns-block-head>
 
     <div class="manager-block__body">
@@ -31,11 +31,13 @@
   import positionTable from './position-table';
   import {getTime} from '../../utils/library/time';
   import {getData} from '../../service/fetch';
-  import qs from 'querystring'
-
+  import baseMixins from '../../mixins/index';
+  import qs from 'querystring';
 
   export default create({
     name: 'managePositionInfo',
+
+    mixins: [ baseMixins ],
 
     components: {
       Tab,
@@ -59,9 +61,9 @@
           businessCompletionAmount: {
             list: [
               { value: 'departmentName', label: '区域名称', width: ""},
-              { value: 'actualDenominator', label: '计划金额(万元)'},
+              { value: 'actualDenominator', label: '计划金额'},
               { value: 'actualTarget', label:'完成率', unit: '%'},
-              { value: 'actualNumerator', label: '完成金额(万元)', unit: '万元'}
+              { value: 'actualNumerator', label: '完成金额', unit: '万元'}
             ],
             key: '80',
             orderBy: 'actualNumerator'
@@ -96,11 +98,16 @@
     },
 
     created(){
+      this.refresh();
       this.getTableData();
     },
 
     methods: {
       getTime,
+
+      refresh(){
+        this.getTableData();
+      },
 
       clickColumn(item) {
         let {departmentID, departmentName} = item;
@@ -112,12 +119,10 @@
       getTableData(){
         const keys = ['80', '256', '14'];
         let query =  keys.map( i => {
-          return {
+          return this.getQueryByFactory({
             targetItemID: i,
-            targetLevel: 1,
-            repotyType: 0,
-            date: new Date().getFullYear(),
-          }
+            targetLevel: 1
+          })
         });
 
         getData(query).then( res => {

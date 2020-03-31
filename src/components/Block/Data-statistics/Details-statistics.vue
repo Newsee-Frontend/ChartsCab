@@ -71,21 +71,14 @@
       };
     },
 
-    watch: {
-      //年的修改
-      global_year() {
-        this.getRevenueData();
-      },
-    },
-
     created() {
-      this.getRevenueData();
+      this.refresh();
     },
 
 
     methods: {
       //获取当前条件下的数据
-      getRevenueData() {
+      refresh() {
         this.getDataBox();     //数据块
         this.getPieChart();    //饼图
       },
