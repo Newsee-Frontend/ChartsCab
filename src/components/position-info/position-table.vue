@@ -105,7 +105,7 @@
       height:32px;
       line-height: 32px;
       tr th:nth-of-type(1){
-        width: 40%;
+        width: 36%;
       }
     }
 
@@ -119,8 +119,7 @@
 
     tbody {
       tr {
-        height: 60px;
-        line-height: 60px;
+        height: 48px;
         border-bottom: 1px solid #eff4f7;
         color: #999999;
 

@@ -66,8 +66,6 @@ $top_gap: 102px;
 
     .container-block {
       padding-top: 5px;
-      padding-left: 12px;
-      padding-right: 12px;
       margin-bottom: 10px;
     }
   }
