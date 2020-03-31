@@ -50,7 +50,7 @@
       Tabs
     },
 
-    mixins: ['baseMixins'],
+    mixins: [baseMixins],
 
     props: {
       departmentId: [Number, String]
@@ -103,7 +103,10 @@
       };
     },
     methods: {
-
+      //重刷
+      refresh(){
+        this.getBarData();
+      },
 
       changeTab() {
         this.activeFeeType[0] === this.activeFeeType[1] && this.changeTab2();
@@ -124,7 +127,7 @@
             targetLevel: 1
           })
         });
-        getData([{targetItemID: 256, targetLevel: 1}, {targetItemID: 266, targetLevel: 1}]).then(res => {
+        getData(params).then(res => {
           this.orgData = res;
           this.changeTab2();
         })
@@ -132,7 +135,7 @@
     },
 
     created() {
-      this.getBarData();
+      this.refresh();
     },
 
   });

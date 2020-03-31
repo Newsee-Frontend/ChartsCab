@@ -14,6 +14,8 @@ export default {
     }
   },
   methods: {
+    refresh(){},
+
     /**
      * getQueryByFactory
      * @param options - 个性化入参
