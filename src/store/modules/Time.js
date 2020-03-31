@@ -1,12 +1,13 @@
 const Time = {
   state: {
     global_year: new Date().getFullYear(),
-    isCurrentYear: new Date().getFullYear() === this.global_year
+    isCurrentYear: true
   },
 
   mutations: {
     SET_GLOBAL_TEAR: (state, data) => {
       state.global_year = data;
+      state.isCurrentYear = !!(data ===  new Date().getFullYear());
     },
   },
   actions: {

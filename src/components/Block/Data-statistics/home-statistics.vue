@@ -27,11 +27,11 @@
 <script>
   import create from '../../../utils/core/create-basic';
   import Mixins from './mixins';
+  import baseMixins from '../../../mixins/index'
   import {getData} from '../../../service/fetch';
-
   export default create({
     name: 'data-statistics',
-    mixins: [Mixins],
+    mixins: [Mixins, baseMixins],
     data() {
       return {
         /**

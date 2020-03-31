@@ -13,7 +13,6 @@ export default create({
   data() {
     return {
       palette,
-      year: new Date().getFullYear(),
     };
   },
   props: {
