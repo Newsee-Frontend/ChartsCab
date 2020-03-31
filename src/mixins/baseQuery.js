@@ -8,6 +8,11 @@ export default {
   computed: {
     ...mapGetters(['global_year', 'isCurrentYear']),
   },
+  watch: {
+    global_year(val) {
+      this.refresh();
+    }
+  },
   methods: {
     /**
      * getQueryByFactory
