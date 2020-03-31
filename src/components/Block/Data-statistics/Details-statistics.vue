@@ -14,7 +14,7 @@
       </ns-year-picker>
 
       <!--头部标题区域-->
-      <ns-block-head>
+      <ns-block-head class="detail-head">
         <template slot="sub">
           <div :class="isCurrentYear ? '' : 'no-tab'">{{currentTimeTitle()}}</div>
         </template>
@@ -179,6 +179,9 @@
   @import '../../../style/tab.scss';
 
   .data-statistics {
+    .detail-head{
+      padding: 0 12px;
+    }
     .body-area {
       padding: 0 12px;
     }
