@@ -169,7 +169,7 @@
 
       //月、季度、年的修改
       changeTab() {
-        this.getRevenueData();
+        this.refresh();
       },
     },
   });
