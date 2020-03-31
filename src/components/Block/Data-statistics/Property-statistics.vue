@@ -1,18 +1,20 @@
 <!--物业费相关 - 统计  数据box-->
 <template>
-  <ns-row class="head" type="flex" justify="space-between" gutter="5">
-    <ns-col
+  <ns-row class="head" justify="space-between" gutter="5">
+    <ns-skeleton row="3" :loading="!finalData.length">
+      <ns-col
       :span="24 / finalData.length"
       v-for="(item, itemIndex) in finalData"
       :key="itemIndex"
-    >
-      <ns-data-box
-        :content="item.content"
-        :color="item.color"
-        :back="item.back"
-        :perNum="finalData.length"
-      ></ns-data-box>
-    </ns-col>
+      >
+        <ns-data-box
+          :content="item.content"
+          :color="item.color"
+          :back="item.back"
+          :perNum="finalData.length"
+        ></ns-data-box>
+      </ns-col>
+    </ns-skeleton>
   </ns-row>
 </template>
 
@@ -21,6 +23,7 @@
   import Mixins from './mixins';
   import {getData} from '../../../service/fetch';
   import {singleBoxDataHandle} from '../../../utils/data';
+  import { Skeleton } from 'vant';
 
   export default create({
     name: "Property-statistics",
@@ -30,7 +33,9 @@
       activeName: [Number, String],
       departmentId: [Number, String]
     },
-    components: {},
+    components: {
+      Skeleton
+    },
     data() {
       return {
 
