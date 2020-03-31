@@ -4,8 +4,8 @@
       <!--表头-->
       <thead>
         <tr>
-          <th class="index" width="10px"></th>
-          <th v-for="column in columnList" :key="column.value" width="120px">{{ column.label }}</th>
+          <th class="index" width="20px"></th>
+          <th v-for="column in columnList" :key="column.value">{{ column.label }}</th>
         </tr>
       </thead>
 
@@ -34,8 +34,11 @@
 </template>
 
 <script>
-export default {
+  import baseMixins from '../../mixins/index';
+  export default {
   name: 'position-table',
+
+  mixins: [baseMixins],
 
   props: {
     data: {
@@ -65,7 +68,7 @@ export default {
     return {
       showAll: false,
 
-      defaultNum: 6
+      defaultNum: 6,
     };
   },
 
@@ -73,6 +76,10 @@ export default {
     clickColumn(item) {
       this.$emit('clickColumn', item);
     },
+
+    refresh(){
+      this.showAll = false
+    }
   },
 };
 </script>
@@ -89,6 +96,7 @@ export default {
     width: 100%;
     font-size: 14px;
     margin-top: 10px;
+    table-layout:fixed;
 
     thead {
       background: #f2f3f6;
@@ -99,13 +107,16 @@ export default {
       line-height: 32px;
       tr th:nth-of-type(2){
         text-align: left;
-        max-width: 100px;
+        min-width: 100px;
+        width: 30%;
       }
     }
 
     thead th,
     tbody td {
       text-align: center;
+      word-wrap: break-word;
+      word-break: break-all;
     }
 
     tbody {

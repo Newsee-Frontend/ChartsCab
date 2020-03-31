@@ -32,11 +32,13 @@
   import positionTable from './position-table';
   import {getTime} from '../../utils/library/time';
   import {getData} from '../../service/fetch';
-  import qs from 'querystring'
-
+  import baseMixins from '../../mixins/index';
+  import qs from 'querystring';
 
   export default create({
     name: 'managePositionInfo',
+
+    mixins: [ baseMixins ],
 
     components: {
       Tab,
@@ -97,11 +99,16 @@
     },
 
     created(){
+      this.refresh();
       this.getTableData();
     },
 
     methods: {
       getTime,
+
+      refresh(){
+        this.getTableData();
+      },
 
       clickColumn(item) {
         let {departmentID, departmentName} = item;
@@ -113,12 +120,10 @@
       getTableData(){
         const keys = ['80', '256', '14'];
         let query =  keys.map( i => {
-          return {
+          return this.getQueryByFactory({
             targetItemID: i,
-            targetLevel: 1,
-            repotyType: 0,
-            date: new Date().getFullYear(),
-          }
+            targetLevel: 1
+          })
         });
 
         getData(query).then( res => {
