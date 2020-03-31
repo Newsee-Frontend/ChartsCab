@@ -174,6 +174,7 @@
 
       //年份修改
       changeYear() {
+
         this.getRevenueData();
       },
     },

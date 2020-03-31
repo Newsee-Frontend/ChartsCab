@@ -45,6 +45,10 @@
       this.getArray();
     },
 
+    computed(){
+      
+    },
+
     watch: {
       value: {
         handler(val) {
@@ -79,10 +83,7 @@
 
       confirm() {
         this.showPicker = false;
-
-
         this.$emit('input', this.currentYear);
-
         if (this.value !== this.currentYear) {
           this.$emit('change', this.currentYear);
         }

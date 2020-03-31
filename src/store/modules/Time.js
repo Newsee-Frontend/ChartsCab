@@ -1,6 +1,6 @@
 const Time = {
   state: {
-    global_year: '',
+    global_year: new Date().getFullYear(),
     isCurrentYear: new Date().getFullYear() === this.global_year
   },
 
