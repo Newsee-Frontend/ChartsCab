@@ -6,8 +6,9 @@ import '../../UI/index';
 
 Vue.config.productionTip = false;
 
+
 new Vue({
   el: '#app',
-  components: { App },
+  components: {App},
   template: '<App/>',
 });
