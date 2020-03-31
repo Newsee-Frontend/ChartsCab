@@ -20,7 +20,7 @@
           <td class="column-index">{{ index + 1 }}</td>
 
           <td v-for="column in columnList" :key="column.value" :class="`column-${column.value}`">
-            <div>{{ item[column.value] || 0 }}</div>
+            <div>{{ item[column.value] || 0 }}{{ column.unit === '%' ? '%' : '' }}</div>
           </td>
         </tr>
 

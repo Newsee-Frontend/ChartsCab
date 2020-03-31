@@ -61,6 +61,7 @@ export default {
         id: this.id,
         pixelRatio: window.devicePixelRatio,
         padding: [50, 'auto', 'auto'],
+        appendPadding: [15, 0]
       });
       this.chart.tooltip(false);
       this.chart.axis('time', {
