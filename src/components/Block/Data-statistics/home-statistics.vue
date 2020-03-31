@@ -54,15 +54,10 @@
       };
     },
 
-    watch: {
-      global_year(){
-        this.getRevenueData();
-      }
+    created() {
+      this.refresh();
     },
 
-    created() {
-      this.getRevenueData();
-    },
     computed: {
       query() {
         return this.ids_request.map(i => {
@@ -73,7 +68,12 @@
         });
       }
     },
+
     methods: {
+      refresh(){
+        this.getRevenueData()
+      },
+
       /**
        * 获取当前条件下的数据
        */
