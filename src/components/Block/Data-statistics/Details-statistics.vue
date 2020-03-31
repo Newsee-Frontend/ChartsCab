@@ -23,9 +23,11 @@
 
     <div class="body-area">
       <ns-row class="content-area" gutter="5">
-        <ns-col span="8" v-for="(item, index) in finalData" :key="index">
-          <ns-data-box :content="item.content" :color="item.color" :back="item.back"></ns-data-box>
-        </ns-col>
+        <ns-skeleton row="8" :loading="!finalData.length">
+          <ns-col span="8" v-for="(item, index) in finalData" :key="index">
+            <ns-data-box :content="item.content" :color="item.color" :back="item.back"></ns-data-box>
+          </ns-col>
+        </ns-skeleton>
       </ns-row>
     </div>
 
@@ -38,7 +40,7 @@
 
 <script>
   import create from '../../../utils/core/create';
-  import { Tab, Tabs } from 'vant';
+  import { Tab, Tabs, Skeleton } from 'vant';
   import pieCharts from '../../Charts/pieCharts/pieCharts';
   import Mixins from './mixins';
   import baseMixin from '../../../mixins/index';
@@ -52,6 +54,7 @@
     components: {
       Tabs,
       Tab,
+      Skeleton,
       pieCharts,
     },
 
