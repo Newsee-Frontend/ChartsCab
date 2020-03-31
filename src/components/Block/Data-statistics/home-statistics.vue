@@ -5,9 +5,9 @@
       <template slot="sub">{{currentTimeTitle()}}</template>
       <template slot="right">
         <!--时间 - 年度 选择-->
-        <ns-year-picker v-model="year" @change="changeYear">
+        <ns-year-picker>
           <div class="time-picker fr clear">
-            <div>{{ year }} 年</div>
+            <div>{{ global_year }} 年</div>
             <ns-icon name="play"></ns-icon>
           </div>
         </ns-year-picker>
@@ -54,6 +54,12 @@
       };
     },
 
+    watch: {
+      global_year(){
+        this.getRevenueData();
+      }
+    },
+
     created() {
       this.getRevenueData();
     },
@@ -62,10 +68,7 @@
         return this.ids_request.map(i => {
           return {
             targetItemID: i,
-            targetLevel: 2,
-            departmentID: this.departmentId,
-            repotyType: 0,  //本年有季度，月份， 其他没有
-            date: this.year === this.thisYear ? '' : this.year, //all、yyyy、yyyymm
+            targetLevel: 2
           };
         });
       }
@@ -75,8 +78,6 @@
        * 获取当前条件下的数据
        */
       getRevenueData() {
-        console.log('入参：');
-        console.log(this.query);
         //发起请求数据
         getData(this.query).then(res => {
 
@@ -129,10 +130,6 @@
           };
         });
       },
-
-      changeYear() {
-        this.getRevenueData()
-      }
     },
   });
 </script>

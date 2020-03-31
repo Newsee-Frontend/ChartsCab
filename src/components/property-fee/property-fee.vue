@@ -8,7 +8,7 @@
         :name="tabIndex"
         :key="tabIndex"
       >
-        <ns-property-statistics :activeName="activeName" :departmentId="departmentId"></ns-property-statistics>
+        <ns-property-statistics :activeName="activeName"></ns-property-statistics>
       </ns-tab>
     </ns-tabs>
 
@@ -38,6 +38,8 @@
   import propertyStatistics from '../Block/Data-statistics/Property-statistics'
   import barCharts from '../Charts/barCharts/barCharts';
   import {getData} from '../../service/fetch';
+  import baseMixins from '../../mixins/index';
+
 
   export default create({
     name: 'property-free',
@@ -47,6 +49,9 @@
       Tab,
       Tabs
     },
+
+    mixins: ['baseMixins'],
+
     props: {
       departmentId: [Number, String]
     },
@@ -56,6 +61,8 @@
         activeName: 0,
 
         activeFeeType: [0, 0],
+
+        ids: [256, 266],
 
         tabData: [
           {
@@ -96,23 +103,30 @@
       };
     },
     methods: {
+
+
       changeTab() {
         this.activeFeeType[0] === this.activeFeeType[1] && this.changeTab2();
       },
       changeTab2(val) {
-        let ids = [256, 266];
         let attrs = ['actualDenominator', 'actualNumerator', 'actualTarget'];
         let index = this.activeFeeType[this.activeName];
-        this.barData = this.orgData[ids[this.activeName]].map(i => ({
+        this.barData = this.orgData[this.ids[this.activeName]].map(i => ({
           name: i.departmentName,
           value: Number(i[attrs[index]]),
         }));
       },
+
       getBarData() {
-        var _this = this;
+        let params = this.ids.map( i=> {
+          return this.getQueryByFactory({
+            targetItemID: i,
+            targetLevel: 1
+          })
+        });
         getData([{targetItemID: 256, targetLevel: 1}, {targetItemID: 266, targetLevel: 1}]).then(res => {
-          _this.orgData = res;
-          _this.changeTab2();
+          this.orgData = res;
+          this.changeTab2();
         })
       }
     },

@@ -29,7 +29,7 @@ export default {
         targetLevel: targetLevel || 2,
         departmentID: departmentID || '',
         repotyType: 0,  //本年有季度，月份， 其他没有
-        date: this.isCurrentYear ? '' : this.global_year, //all、yyyy、yyyymm
+        date: this.global_year, //all、yyyy、yyyymm
       };
 
       return base;

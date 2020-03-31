@@ -30,7 +30,7 @@ export default create({
     getTime,
     singleBoxDataHandle,
     currentTimeTitle() {
-      return `统计数据截止: ${this.getTime()}`
+      return `截止: ${this.getTime()}`
     },
   },
 })

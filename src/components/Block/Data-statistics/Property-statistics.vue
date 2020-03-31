@@ -21,6 +21,7 @@
 <script>
   import create from '../../../utils/core/create';
   import Mixins from './mixins';
+  import baseMixins from '../../../mixins/index';
   import {getData} from '../../../service/fetch';
   import {singleBoxDataHandle} from '../../../utils/data';
   import { Skeleton } from 'vant';
@@ -28,10 +29,9 @@
   export default create({
     name: "Property-statistics",
 
-    mixins: [Mixins],
+    mixins: [Mixins, baseMixins],
     props: {
       activeName: [Number, String],
-      departmentId: [Number, String]
     },
     components: {
       Skeleton
@@ -67,6 +67,13 @@
         }
       }
     },
+
+    watch: {
+      global_year(){
+        this.getDataBox()
+      }
+    },
+
     methods: {
       getData,
       //数据块
@@ -74,13 +81,11 @@
 
         //入参
         const query = this.ids_request.map(i => {
-          return {
+          return this.getQueryByFactory({
             targetItemID: i,
             targetLevel: 2,
-            departmentID: this.departmentId,
-            repotyType: this.year === this.thisYear ? this.tabValue : 0,  //本年有季度，月份， 其他没有
-            date: this.year === this.thisYear ? '' : this.year, //all、yyyy、yyyymm
-          };
+            date: this.global_year
+          });
         });
 
 
