@@ -100,7 +100,6 @@
 
     created(){
       this.refresh();
-      this.getTableData();
     },
 
     methods: {
