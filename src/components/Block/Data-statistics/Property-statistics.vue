@@ -83,12 +83,10 @@
         const query = this.ids_request.map(i => {
           return this.getQueryByFactory({
             targetItemID: i,
-            targetLevel: 2,
-            date: this.global_year
           });
         });
 
-
+        console.log('数据块2',query)
         this.getData(query).then(res => {
 
           console.log('请求返回数据:');

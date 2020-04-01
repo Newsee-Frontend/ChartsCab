@@ -69,11 +69,10 @@
         let key = '207';
         let params = [ this.getQueryByFactory({
           targetItemID: key,
-          targetLevel: 1,
           date: getRecentlyMonth(6).join(','),
           repotyType: 3  //月份
         })];
-
+        console.log('折线1',params)
         getData(params).then(res => {
           this.halfYearList = (res[key] || []).map(i => {
             return {time: i.date, value: +i.actualTarget, type: '近半年（万元）'}
@@ -89,11 +88,10 @@
         let date = getFullYearMonth(thisYear).concat(getFullYearMonth(thisYear - 1));
         let params = [this.getQueryByFactory({
           targetItemID: key,
-          targetLevel: 1,
           date: date.join(','),
           repotyType: 3  //月份
         })];
-
+        console.log('折线2',params)
         getData(params).then(res => {
           this.feeCollectionRateList = (res[key] || []).map(i => {
             return {time: i.date.slice(-2), value: +i.actualTarget, type: i.date.slice(0, 4)}

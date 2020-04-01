@@ -110,9 +110,8 @@
       },
 
       clickColumn(item) {
-        let {departmentID, departmentName} = item;
-        qs.stringify({departmentID, departmentName});
-        location.href = `../Details/index.html?${qs.stringify({departmentID, departmentName})}`;
+        let {departmentID, departmentName, targetLevel} = item;
+        location.href = `../${targetLevel === '4' ? 'Details' : 'Home'}/index.html?${qs.stringify({departmentID, departmentName, targetLevel})}`;
       },
 
 
@@ -121,10 +120,9 @@
         let query =  keys.map( i => {
           return this.getQueryByFactory({
             targetItemID: i,
-            targetLevel: 1
-          })
+          }, true)
         });
-
+        console.log('表格NEXT',query)
         getData(query).then( res => {
           Object.keys(this.tables).forEach( i => {
             let tableName = i;

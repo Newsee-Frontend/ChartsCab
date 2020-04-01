@@ -124,9 +124,9 @@
         let params = this.ids.map( i=> {
           return this.getQueryByFactory({
             targetItemID: i,
-            targetLevel: 1
-          })
+          }, true)
         });
+        console.log('条形图NEXT',params)
         getData(params).then(res => {
           this.orgData = res;
           this.changeTab2();

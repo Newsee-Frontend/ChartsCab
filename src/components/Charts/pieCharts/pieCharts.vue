@@ -121,8 +121,11 @@ export default {
         Object.keys(this.keyRef).forEach(key => {
           i[key] = i[this.keyRef[key]];
         });
-        i.const = 'const';
-        return i;
+        return {
+          name: i.name,
+          value: i.value,
+          const: 'const',
+        };
       });
 
       //使name关联value用于图例展示
@@ -133,9 +136,9 @@ export default {
       });
 
       //计算总和用于显示
-      this.pieSum = this.data
+      this.pieSum = this.pieData
         .reduce((sum, obj) => {
-          return sum + obj.value;
+          return sum + Number(obj.value);
         }, 0)
         .toFixed(2);
     },

@@ -111,7 +111,7 @@ export default create({
           date: getAllMonths(2)
         })
       });
-
+      console.log('折线图',params)
       getData(params).then(res => {
         this.orgData = res;
         this.changeSelect(0);

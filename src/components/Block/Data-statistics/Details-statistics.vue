@@ -89,12 +89,11 @@
         const query = this.ids_request.map(i => {
           return this.getQueryByFactory({
             targetItemID: i,
-            targetLevel: 1,
             repotyType: this.isCurrentYear ? this.tabValue : 0,
             date: this.isCurrentYear? '' : this.global_year
           });
         });
-
+        console.log('数据块',query)
         getData(query).then(res => {
 
           console.log('请求返回数据:');
@@ -154,12 +153,11 @@
         const pie_requestId = 229;
         let params = [this.getQueryByFactory({
           targetItemID: pie_requestId,
-          targetLevel: 1,
           repotyType: this.isCurrentYear ? this.tabValue : 0,
           date: this.isCurrentYear? '' : this.global_year,
           childTargetName: 'all',
         })];
-
+        console.log('饼图',params)
         getData(params).then(res => {
           this.pieData = (res[pie_requestId] || []).map(i => {
             return { name: i.targetItem, value: i.actualTarget };

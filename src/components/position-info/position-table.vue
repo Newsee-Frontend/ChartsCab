@@ -198,8 +198,10 @@
     color: #a2a3a4;
     margin-bottom: 50px;
     &.no-data{
-      padding: 30px;
+      height: 339px;
+      line-height: 339px;
       border-bottom: 1px solid #EBEBEB;
+      box-sizing: border-box;
     }
   }
 }

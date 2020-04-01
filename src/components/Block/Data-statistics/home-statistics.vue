@@ -61,10 +61,9 @@
     computed: {
       query() {
         return this.ids_request.map(i => {
-          return {
+          return this.getQueryByFactory({
             targetItemID: i,
-            targetLevel: 2
-          };
+          });
         });
       }
     },
@@ -79,6 +78,7 @@
        */
       getRevenueData() {
         //发起请求数据
+        console.log('数据块1',this.query)
         getData(this.query).then(res => {
 
           console.log('请求返回数据:');

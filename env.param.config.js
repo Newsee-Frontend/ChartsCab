@@ -13,7 +13,7 @@ module.exports = {
     remUnit: 18,
     proxyTable: {
       '/ns-face-target': {
-        target: 'http://120.27.3.224:8066/',
+        target: 'http://120.27.3.224:8077/',
         changeOrigin: true,
       },
     }
