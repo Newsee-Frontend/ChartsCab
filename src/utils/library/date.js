@@ -27,9 +27,11 @@ export const getFullYearMonth = function(year) {
  */
 export const getAllMonths = function(num) {
   let thisYear = new Date().getFullYear();
+  let thisMonth = new Date().getMonth() + 1;
   let arr = [];
   for (let i = 0; i < num; i++) {
-    for (let j = 1; j < 13; j++) {
+    let lastMonth = i === 0 ? thisMonth : 12;
+    for (let j = 1; j <= lastMonth; j++) {
       arr.push(thisYear - i + j.toString().padStart(2, 0));
     }
   }

@@ -145,8 +145,9 @@ export default create({
       color: rgb(102, 102, 102);
       background: rgba(242, 243, 246, 1);
       border-radius: 4px;
-      padding: 9px 0;
+      padding: 7px 0;
       margin: 0 5px;
+      font-size: 12px;
       &:first-of-type {
         margin-left: 0;
       }

@@ -25,11 +25,6 @@ export default {
       type: String,
       default: '100%',
     },
-    // 高度范围
-    heightRange: {
-      type: Array,
-      default: () => [150, 300],
-    },
     // 每一项高度
     itemHeight: {
       type: Number,
@@ -107,17 +102,15 @@ export default {
      * 绘制
      */
     paint() {
-      let itemsHeigtht = this.barData.length * this.itemHeight;
-      if (itemsHeigtht < this.heightRange[0]) {
-        this.finalHeight = this.heightRange[0];
-      } else if (itemsHeigtht > this.heightRange[1]) {
-        this.finalHeight = this.heightRange[1];
-      } else {
-        this.finalHeight = itemsHeigtht;
-      }
+      this.finalHeight = this.barData.length * this.itemHeight;
       this.chart.changeSize(null, this.finalHeight);
       this.chart.clear();
       this.chart.source(this.barData, {
+        name: {
+          formatter(val){
+            return val.length > 8 ? val.slice(0, 8) : val;
+          }
+        },
         value: {
           range: [0, 0.9],
         },

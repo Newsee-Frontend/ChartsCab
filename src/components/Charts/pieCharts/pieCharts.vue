@@ -62,7 +62,7 @@ export default {
 
   computed: {
     isBlank(){
-      return !this.data.length;
+      return !this.data.length || this.pieSum === 0;
     }
 
   },
@@ -139,8 +139,7 @@ export default {
       this.pieSum = this.pieData
         .reduce((sum, obj) => {
           return sum + Number(obj.value);
-        }, 0)
-        .toFixed(2);
+        }, 0);
     },
     /**
      * 绘制
@@ -159,7 +158,7 @@ export default {
         html: `<div style="text-align: center;">
           <div style="font-size: ${216 / remUnit}px;color: #999;">收入</div>
           <div style="font-size: ${288 / remUnit}px;color: #333;white-space: nowrap;">
-            <strong>${this.pieSum}</strong><span style="font-size: ${216 /
+            <strong>${this.pieSum.toFixed(2)}</strong><span style="font-size: ${216 /
           remUnit}px;color: #999;">${this.unit}</span>
           </div>
         </div>`,

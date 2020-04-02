@@ -19,7 +19,11 @@
         >
           <!-- <td class="column-index">{{ index + 1 }}</td> -->
           <td v-for="(column, colIndex) in columnList" :key="column.value" :class="`column-${column.value}`">
-            <div><span class="column-index" v-show="colIndex === 0">{{ index + 1 }}</span>{{ item[column.value] || 0 }}{{ column.unit === '%' ? '%' : '' }}</div>
+            <div>
+              <span class="column-index" v-show="colIndex === 0">{{ index + 1 }}</span>
+              {{ item[column.value] || 0 }}{{ column.unit === '%' ? '%' : '' }}
+              <span class="column-icon" v-show="colIndex === 3">›</span>
+            </div>
           </td>
         </tr>
 
@@ -133,6 +137,14 @@
             margin-right: 6px;
             font-weight: bold;
             color: #b2b2b2;
+          }
+          .column-icon {
+            float: right;
+            margin-top: -2px;
+            vertical-align: top;
+            text-align: right;
+            font-size: 24px;
+            color: #999;
           }
           //区域
           &:nth-of-type(1) {

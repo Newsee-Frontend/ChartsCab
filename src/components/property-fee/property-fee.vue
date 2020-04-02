@@ -27,8 +27,10 @@
       >
       </ns-tab>
     </ns-tabs>
-
-    <ns-bar-charts :data="barData" id="propertyFeeChart"></ns-bar-charts>
+    <div class="bar-contanier" :class="tabData[activeName].isLimited ? 'is-limited' : ''">
+      <ns-bar-charts :data="barData" id="propertyFeeChart"></ns-bar-charts>
+      <div class="show-more" v-show="tabData[activeName].showBtn" @click="toggle">{{tabData[activeName].isLimited ? '查看更多' : '收起'}}</div>
+    </div>
   </div>
 </template>
 
@@ -67,9 +69,13 @@
         tabData: [
           {
             title: '物业费收缴',
+            showBtn: false,
+            isLimited: false,
           },
           {
             title: '物业费欠费',
+            showBtn: false,
+            isLimited: false,
           },
         ],
 
@@ -107,6 +113,9 @@
       refresh(){
         this.getBarData();
       },
+      toggle(){
+        this.tabData[this.activeName].isLimited = !this.tabData[this.activeName].isLimited;
+      },
 
       changeTab() {
         this.activeFeeType[0] === this.activeFeeType[1] && this.changeTab2();
@@ -128,6 +137,10 @@
         });
         console.log('条形图NEXT',params)
         getData(params).then(res => {
+          this.ids.forEach((item, index) => {
+            this.tabData[index].showBtn = res[item].length > 10 ? true : false;
+            this.tabData[index].isLimited = this.tabData[index].showBtn;
+          });
           this.orgData = res;
           this.changeTab2();
         })
@@ -151,6 +164,29 @@
 
     .line-tab {
       margin: 4px 0 10px 0;
+    }
+
+    .bar-contanier{
+      position: relative;
+      overflow: hidden;
+      &.is-limited{
+        height: 275px;
+        .show-more{
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+        }
+      }
+      canvas{
+        vertical-align: top;
+      }
+      .show-more{
+        line-height: 25px;
+        font-size: 14px;
+        text-align: center;
+        color: #a2a3a4;
+        background: #fff;
+      }
     }
   }
 </style>
