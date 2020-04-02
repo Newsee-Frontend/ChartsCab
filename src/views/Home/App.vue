@@ -1,6 +1,6 @@
 <!--首页-->
 <template>
-  <ns-layout title="管理驾驶舱">
+  <ns-layout :title="departmentName">
     <ns-data-statistics class="container-block"></ns-data-statistics>
     <ns-property-fee></ns-property-fee>
     <ns-revenue-chart></ns-revenue-chart>

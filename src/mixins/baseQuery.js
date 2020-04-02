@@ -4,12 +4,15 @@ import {getUrlParam} from '../utils/library/urlhandle'
 export default {
   data() {
     return {
+      departmentName: '',
+
       nextLevelMap: {
         2: 1,
         1: 4
       },
     };
   },
+
   computed: {
     ...mapGetters(['global_year', 'isCurrentYear']),
   },
@@ -17,6 +20,10 @@ export default {
     global_year(val) {
       this.refresh();
     }
+  },
+
+  created(){
+    this.departmentName = getUrlParam('departmentName') || '移动管理驾驶舱';
   },
   methods: {
     refresh(){},
