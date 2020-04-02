@@ -61,10 +61,10 @@
         tables: {
           businessCompletionAmount: {
             list: [
-              { value: 'departmentName', label: '区域名称', width: ""},
+              { value: 'departmentName', label: '区域名称'},
               { value: 'actualDenominator', label: '计划金额'},
               { value: 'actualTarget', label:'完成率', unit: '%'},
-              { value: 'actualNumerator', label: '完成金额', unit: '万元'}
+              { value: 'actualNumerator', label: '完成金额'}
             ],
             key: '80',
             orderBy: 'actualNumerator'
@@ -74,7 +74,7 @@
               { value: 'departmentName', label: '区域名称'},
               { value: 'actualDenominator', label: '应收金额'},
               { value: 'actualTarget', label:'完成率',unit: '%'},
-              { value: 'actualNumerator', label: '实收金额',unit: '万元'}
+              { value: 'actualNumerator', label: '实收金额'}
             ],
             key: '256',
             orderBy: 'actualNumerator'
@@ -82,8 +82,8 @@
           projectAreaUnderManagement: {
             list: [
               { value: 'departmentName', label: '区域名称'},
-              { value: 'shouldTarget', label: '计划面积', unit: '万方'},
-              { value: 'actualTarget', label: '实际完成面积', unit: '万方'},
+              { value: 'shouldTarget', label: '计划面积'},
+              { value: 'actualTarget', label: '实际完成面积'},
             ],
             key: '14',
             orderBy: ''

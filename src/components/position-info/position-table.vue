@@ -4,8 +4,8 @@
       <!--表头-->
       <thead>
         <tr>
-          <!-- <th class="index" width="20px"></th> -->
           <th v-for="column in columnList" :key="column.value">{{ column.label }}</th>
+          <th width="10"></th>
         </tr>
       </thead>
 
@@ -17,14 +17,13 @@
           v-show="showAll || index < defaultNum"
           @click="clickColumn(item)"
         >
-          <!-- <td class="column-index">{{ index + 1 }}</td> -->
           <td v-for="(column, colIndex) in columnList" :key="column.value" :class="`column-${column.value}`">
             <div>
               <span class="column-index" v-show="colIndex === 0">{{ index + 1 }}</span>
-              {{ item[column.value] || 0 }}{{ column.unit === '%' ? '%' : '' }}
-              <span class="column-icon" v-show="colIndex === 3">›</span>
+              {{ item[column.value] || '—' }}{{ column.unit }}
             </div>
           </td>
+          <td class="column-icon"><div>›</div></td>
         </tr>
 
       </tbody>
@@ -119,6 +118,9 @@
       text-align: left;
       word-wrap: break-word;
       word-break: break-all;
+      &:last-of-type{
+        padding-left: 0;
+      }
     }
 
     tbody {
@@ -133,18 +135,19 @@
 
         td{
           line-height: 20px;
+          &.column-icon {
+            div{
+              vertical-align: top;
+              margin-top: -5px;
+              text-align: right;
+              font-size: 24px;
+              color: #999;
+            }
+          }
           .column-index {
             margin-right: 6px;
             font-weight: bold;
             color: #b2b2b2;
-          }
-          .column-icon {
-            float: right;
-            margin-top: -2px;
-            vertical-align: top;
-            text-align: right;
-            font-size: 24px;
-            color: #999;
           }
           //区域
           &:nth-of-type(1) {
@@ -157,13 +160,11 @@
               white-space: nowrap;
             }
           }
-
-
           .unit{
             font-size: 0.8em;
           }
 
-          &:last-of-type{
+          &:nth-last-of-type(2){
             font-size: 1.2em;
             font-weight: bold;
             color: #333333;
@@ -172,30 +173,26 @@
               color: #333;
             }
           }
-
         }
-
 
         &:last-of-type {
           border-bottom: none;
         }
 
-
-
         &:nth-of-type(1) {
-          td:last-of-type,  .column-index {
+          td:nth-last-of-type(2),  .column-index {
             color: #f13939;
           }
         }
 
         &:nth-of-type(2) {
-          td:last-of-type,  .column-index{
+          td:nth-last-of-type(2),  .column-index{
             color: #ff9c17;
           }
         }
 
         &:nth-of-type(3) {
-          td:last-of-type,  .column-index {
+          td:nth-last-of-type(2),  .column-index {
             color: #3fbf83;
           }
         }
