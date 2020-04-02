@@ -9,7 +9,7 @@
       <ns-tabs class="line-tab" swipeable line-width="80px" line-height="2px" @change="changeTab">
         <ns-tab title="年度营收金额" name="amount"></ns-tab>
         <ns-tab title="营收完成率" name="rate"></ns-tab>
-        <ns-tab title="面积" name="area"></ns-tab>
+        <ns-tab title="在管面积趋势" name="area"></ns-tab>
       </ns-tabs>
 
       <ns-line-charts :data="lineData"></ns-line-charts>
@@ -69,7 +69,7 @@ export default create({
           { value: 4, label: '物业费营收</br>趋势' },
           { value: 5, label: '物业费清欠</br>趋势' },
         ],
-        area: [{ value: 6, label: '在管面积</br>趋势' }],
+        area: [],
       },
       lineData: [],
       orgData: {},
@@ -84,15 +84,15 @@ export default create({
 
     changeTab(val) {
       this.activeType = val;
-      this.getRevenueChartData();
+      this.getRevenueChartData(val === 'area' ? 6 : -1);
     },
 
     /**
      * 获取图的信息
      */
-    getRevenueChartData() {
+    getRevenueChartData(val) {
       let ids = [80, 256, 266, 80, 256, 266, 14];
-      let index = this.activeOption[this.activeType];
+      let index = val > 0 ? val : this.activeOption[this.activeType];
       this.lineData = this.orgData[ids[index]].map(i => ({
         time: i.date.slice(4),
         value: Number(i[index < 3 ? 'actualNumerator' : 'actualTarget']),
