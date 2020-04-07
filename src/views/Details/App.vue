@@ -64,6 +64,12 @@
     },
 
     methods: {
+      refresh(){
+        if(this.global_year === new Date().getFullYear()){
+          this.getHalfYearIncome();
+          this.getFeeCollectionRate();
+        }
+      },
       //近半年营收
       getHalfYearIncome() {
         let key = '207';

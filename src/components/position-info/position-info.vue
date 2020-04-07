@@ -3,7 +3,7 @@
     <!--头部标题区域-->
     <ns-block-head>
       <template slot="main">经营指标排名</template>
-      <template slot="sub">{{`截止: ${getTime()}`}}</template>
+      <template slot="sub">{{deadlineTitle}}</template>
       <template slot="right">单位: 万元</template>
     </ns-block-head>
 
@@ -30,7 +30,6 @@
   import {Tab, Tabs} from 'vant';
   import BlockHead from '../Block/Block-head/Block-head';
   import positionTable from './position-table';
-  import {getTime} from '../../utils/library/time';
   import {getData} from '../../service/fetch';
   import baseMixins from '../../mixins/index';
   import qs from 'querystring';
@@ -103,7 +102,6 @@
     },
 
     methods: {
-      getTime,
 
       refresh(){
         this.getTableData();

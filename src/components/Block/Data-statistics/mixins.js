@@ -29,8 +29,5 @@ export default create({
   methods: {
     getTime,
     singleBoxDataHandle,
-    currentTimeTitle() {
-      return `截止: ${this.getTime()}`
-    },
   },
 })

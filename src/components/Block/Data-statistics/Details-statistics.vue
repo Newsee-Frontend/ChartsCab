@@ -16,7 +16,7 @@
       <!--头部标题区域-->
       <ns-block-head class="detail-head">
         <template slot="sub">
-          <div :class="isCurrentYear ? '' : 'no-tab'">{{currentTimeTitle()}}</div>
+          <div :class="isCurrentYear ? '' : 'no-tab'">{{deadlineTitle}}</div>
         </template>
       </ns-block-head>
     </div>

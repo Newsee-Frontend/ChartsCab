@@ -77,6 +77,12 @@ export default create({
   },
 
   methods: {
+    refresh() {
+      if(this.global_year === new Date().getFullYear()){
+        this.getLineData();
+      }
+    },
+    
     changeSelect(val) {
       this.activeOption[this.activeType] = val;
       this.getRevenueChartData();

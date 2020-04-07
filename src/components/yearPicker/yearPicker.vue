@@ -21,6 +21,7 @@
   import {Picker, Popup} from 'vant';
   import create from '../../utils/core/create';
   import {mapGetters} from 'vuex';
+  import {deadline} from '../../utils/library/time';
 
   export default create({
     name: 'yearPicker',
@@ -73,6 +74,7 @@
       confirm() {
         this.showPicker = false;
         this.$store.dispatch('setGlobalYear', this.currentYear);
+        deadline.splice(0);
       },
     },
   });

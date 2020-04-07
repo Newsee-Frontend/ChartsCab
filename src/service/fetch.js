@@ -57,7 +57,7 @@ export const getData = query => {
     data: params,
     transformRequest: [
       function (data) {
-        console.log(data);
+        // console.log(data);
         data = qs.stringify({
           request: JSON.stringify(data)
         });

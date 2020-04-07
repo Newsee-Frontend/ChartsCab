@@ -1,11 +1,12 @@
 import {mapGetters} from 'vuex';
 import {getUrlParam} from '../utils/library/urlhandle'
+import {getTime, deadline} from '../utils/library/time'
 
 export default {
   data() {
     return {
       departmentName: '',
-
+      deadline,
       nextLevelMap: {
         2: 1,
         1: 4
@@ -15,6 +16,11 @@ export default {
 
   computed: {
     ...mapGetters(['global_year', 'isCurrentYear']),
+    deadlineTitle(){
+      console.log(this.deadline, Math.max(...this.deadline));
+      let deadlineTmp = this.deadline.length && Math.max(...this.deadline) ? getTime(Math.max(...this.deadline)) : '';
+      return `截止: ${deadlineTmp}`;
+    }
   },
   watch: {
     global_year(val) {

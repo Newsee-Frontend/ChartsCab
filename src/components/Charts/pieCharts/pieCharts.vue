@@ -98,7 +98,7 @@ export default {
         itemMarginBottom: 18,
         wordSpace: 4, //marker和文本之间的间距
         itemFormatter: val => {
-          return this.isBlank ?  val : (val + '  ' + this.pieMap[val].toFixed(2) + this.unit);
+          return this.isBlank ? val : (val + '  ' + this.pieMap[val].toFixed(2) + this.unit);
         },
         clickable: false,
       });

@@ -7,6 +7,7 @@
  */
 /*==========================================================================================================================*/
 import axios from 'axios';
+import { deadline } from '../library/time';
 
 const service = axios.create({
   baseURL: process.env.BASE_API,
@@ -30,6 +31,12 @@ service.interceptors.response.use(
       const resultCodeList = ['0000'];
 
       if (resData && resultCodeList.indexOf(resData.NWRespCode) > -1) {
+        deadline.push(Math.max(...Object.values(resData.Record)
+          .map(i => i.map(item => item.targetUpdateTime).filter(item => item))
+          .filter(i => i.length)
+          .toString().split(',')
+          .map(i => Number(i))
+        ));
         return Promise.resolve(resData.Record);
       } else {
         return Promise.reject(resData.NWErrMsg);

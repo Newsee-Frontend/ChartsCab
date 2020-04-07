@@ -9,10 +9,9 @@ function timeCover(num) {
  * 获取时间
  * @returns {string}
  */
-export const getTime = () => {
+export const getTime = val => {
 
-  const timestamp = new Date().getTime();
-
+  const timestamp = val || new Date().getTime();
   const newDate = new Date(timestamp);
 
   const fullYear = newDate.getFullYear();
@@ -27,3 +26,5 @@ export const getTime = () => {
     + timeCover(minutes) + ":" + timeCover(seconds);
 
 };
+
+export const deadline = [];

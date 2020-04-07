@@ -2,7 +2,7 @@
   <div class="home-data-statistics data-statistics">
     <!--头部标题区域-->
     <ns-block-head>
-      <template slot="sub"><span class="time-title">{{currentTimeTitle()}}</span></template>
+      <template slot="sub"><span class="time-title">{{deadlineTitle}}</span></template>
       <template slot="right">
         <!--时间 - 年度 选择-->
         <ns-year-picker>
