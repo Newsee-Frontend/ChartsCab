@@ -2,9 +2,8 @@
   <div class="manager-block container-block">
     <!--头部标题区域-->
     <ns-block-head>
-      <template slot="main">经营指标排名</template>
-      <template slot="sub">{{deadlineTitle}}</template>
-      <template slot="right">单位: 万元</template>
+      <template slot="main">{{titleText[0]}}</template>
+      <template slot="right">{{titleText[1]}}</template>
     </ns-block-head>
 
     <div class="manager-block__body">
@@ -45,55 +44,34 @@
       BlockHead,
       positionTable,
     },
+    props: {
+      titleText: {
+        type: Array,
+        default: () => []
+      },
+      // 标签页配置
+      tabList: {
+        type: Array,
+        default: () => []
+      },
+      // 表格配置
+      tables: {
+        type: Object,
+        default: () => ({})
+      },
+      // 当前目录名
+      curDirname: String,
+      // 详情页目录名
+      detailDirname: {
+        type: String,
+        default: ''
+      },
+    },
 
     data() {
       return {
         isLoading: false,
-        activeTab: 'businessCompletionAmount',
-
-        tabList: [
-          { title: '营业完成金额', name: 'businessCompletionAmount'},
-          { title: '物业费收缴金额', name: 'feeCollectionAmount'},
-          { title: '在管项目面积', name: 'projectAreaUnderManagement'},
-        ],
-
-        tables: {
-          businessCompletionAmount: {
-            list: [
-              { value: 'departmentName', label: '区域名称'},
-              { value: 'actualDenominator', label: '计划金额'},
-              { value: 'actualTarget', label:'完成率', unit: '%'},
-              { value: 'actualNumerator', label: '完成金额'}
-            ],
-            key: '80',
-            orderBy: 'actualNumerator'
-          },
-          feeCollectionAmount: {
-            list: [
-              { value: 'departmentName', label: '区域名称'},
-              { value: 'actualDenominator', label: '应收金额'},
-              { value: 'actualTarget', label:'完成率',unit: '%'},
-              { value: 'actualNumerator', label: '实收金额'}
-            ],
-            key: '256',
-            orderBy: 'actualNumerator'
-          },
-          projectAreaUnderManagement: {
-            list: [
-              { value: 'departmentName', label: '区域名称'},
-              { value: 'shouldTarget', label: '计划面积'},
-              { value: 'actualTarget', label: '实际完成面积'},
-            ],
-            key: '14',
-            orderBy: ''
-          }
-        },
-
-        data: {
-          businessCompletionAmount: [],
-          feeCollectionAmount: [],
-          projectAreaUnderManagement: [],
-        },
+        data: {},
       };
     },
 
@@ -109,12 +87,13 @@
 
       clickColumn(item) {
         let {departmentID, departmentName, targetLevel} = item;
-        location.href = `../${targetLevel === '4' ? 'Details' : 'Home'}/index.html?${qs.stringify({departmentID, departmentName, targetLevel})}`;
+        let dir = targetLevel === '4' && this.detailDirname ? this.detailDirname : this.curDirname;
+        location.href = `../${dir}/index.html?${qs.stringify({departmentID, departmentName, targetLevel})}`;
       },
 
 
       getTableData(){
-        const keys = ['80', '256', '14'];
+        const keys = Object.values(this.tables).map(i => i.key);
         let query =  keys.map( i => {
           return this.getQueryByFactory({
             targetItemID: i,
@@ -125,7 +104,7 @@
           Object.keys(this.tables).forEach( i => {
             let tableName = i;
             let requestId = this.tables[tableName].key;
-            this.data[tableName] = (res[requestId] || []);
+            this.$set(this.data, tableName, res[requestId] || []);
             //根据字段排序
             let sortKey =  this.tables[tableName].orderBy;
             this.data[tableName].sort( (a,b) => {

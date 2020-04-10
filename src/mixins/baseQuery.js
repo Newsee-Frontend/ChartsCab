@@ -32,6 +32,8 @@ export default {
     this.departmentName = getUrlParam('departmentName') || '移动管理驾驶舱';
   },
   methods: {
+    getUrlParam,
+    
     refresh(){},
 
     /**

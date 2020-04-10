@@ -13,17 +13,31 @@
     <div class="pie-chart-container">
       <ns-pie-charts centerText="受理电话<br>占比类别" :data="pieChartData"></ns-pie-charts>
     </div>
+    <ns-position-info
+      v-if="getUrlParam('targetLevel') !== '4'"
+      :titleText="['城市公司排名', '单位: 个']"
+      :tabList="tabList"
+      :tables="tables"
+      curDirname="Service"
+    ></ns-position-info>
   </ns-layout>
 </template>
 
 <script>
 import create from '../../utils/core/create';
-import { dataStatistics, propertyStatistics, BlockHead, lineCharts, pieCharts } from './index';
+import {
+  dataStatistics,
+  propertyStatistics,
+  BlockHead,
+  lineCharts,
+  pieCharts,
+  positionInfo,
+} from './index';
 import baseMixins from '../../mixins/index';
 import { getData } from '../../service/fetch';
 import { getAllMonths } from '../../utils/library/date';
 export default create({
-  name: 'Employee',
+  name: 'Service',
   mixins: [baseMixins],
   components: {
     dataStatistics,
@@ -31,6 +45,7 @@ export default create({
     BlockHead,
     lineCharts,
     pieCharts,
+    positionInfo,
   },
   data() {
     return {
@@ -46,6 +61,41 @@ export default create({
       ],
       lineChartData: [],
       pieChartData: [],
+      tabList: [
+        { title: '服务满意率', name: 'a' },
+        { title: '工单全部数量', name: 'b' },
+        { title: '工单投诉数量', name: 'c' },
+      ],
+      tables: {
+        a: {
+          list: [
+            { value: 'departmentName', label: '区域名称' },
+            { value: 'actualTarget', label: '服务满意率', unit: '%' },
+          ],
+          key: '20',
+          orderBy: 'actualTarget',
+        },
+        b: {
+          list: [
+            { value: 'departmentName', label: '区域名称' },
+            { value: 'actualDenominator', label: '总数' },
+            { value: 'actualTarget', label: '完成率', unit: '%' },
+            { value: 'actualNumerator', label: '完成数' },
+          ],
+          key: '285',
+          orderBy: 'actualNumerator',
+        },
+        c: {
+          list: [
+            { value: 'departmentName', label: '区域名称' },
+            { value: 'actualDenominator', label: '总数' },
+            { value: 'actualTarget', label: '完成率', unit: '%' },
+            { value: 'actualNumerator', label: '完成数' },
+          ],
+          key: '206',
+          orderBy: 'actualNumerator',
+        },
+      },
     };
   },
   methods: {
