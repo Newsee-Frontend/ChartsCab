@@ -55,9 +55,9 @@
 
     methods: {
       getArray() {
-        let currentYear = new Date().getFullYear();
+        this.currentYear = new Date().getFullYear();
         this.columns = Array.from({length: 50}, (v, i) => {
-          return currentYear - i;
+          return this.currentYear - i;
         });
       },
 

@@ -10,6 +10,33 @@
         />
       </template>
     </ns-cell>
+    <ns-cell title="服务" icon="shop-o">
+      <template #right-icon>
+        <ns-icon
+          name="ellipsis"
+          style="line-height: inherit;"
+          @click="junmp('../Service/index.html')"
+        />
+      </template>
+    </ns-cell>
+    <ns-cell title="员工" icon="shop-o">
+      <template #right-icon>
+        <ns-icon
+          name="ellipsis"
+          style="line-height: inherit;"
+          @click="junmp('../Employee/index.html')"
+        />
+      </template>
+    </ns-cell>
+    <ns-cell title="品质" icon="shop-o">
+      <template #right-icon>
+        <ns-icon
+          name="ellipsis"
+          style="line-height: inherit;"
+          @click="junmp('../Quality/index.html')"
+        />
+      </template>
+    </ns-cell>
 
     <ns-index-anchor index="G"/>
     <ns-cell title="概览页" icon="shop-o">

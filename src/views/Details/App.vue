@@ -10,7 +10,7 @@
       </ns-block-head>
 
       <div class="manage-block__body">
-        <ns-line-charts id="incomeTrend " :data="halfYearList"></ns-line-charts>
+        <ns-line-charts id="incomeTrend" :data="halfYearList"></ns-line-charts>
       </div>
     </div>
 

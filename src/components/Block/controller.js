@@ -11,6 +11,18 @@ export default {
       },
     },
   },
+  20: {
+    actualTarget: {
+      sub: '业主满意率',
+      main: {
+        unit: 'percent',
+      },
+      notes: {
+        compare: '',
+        unit: 'percent',
+      },
+    },
+  },
   80: {
     actualDenominator: {
       sub: '计划总营收',
@@ -43,12 +55,36 @@ export default {
       },
     },
   },
+  205: {
+    actualTarget: {
+      sub: '客户投诉数量',
+      main: {
+        unit: 'num',
+      },
+      notes: {
+        compare: '',
+        unit: 'num',
+      },
+    },
+  },
+  206: {
+    actualTarget: {
+      sub: '投诉完成率',
+      main: {
+        unit: 'percent',
+      },
+      notes: {
+        compare: '',
+        unit: 'percent',
+      },
+    },
+  },
   256: {
     actualDenominator: {
       sub: '物业费应收',
       main: {
         unit: 'num',
-      }
+      },
     },
     actualNumerator: {
       sub: '物业费实收',
@@ -104,7 +140,39 @@ export default {
       sub: '本年欠收',
       main: {
         unit: 'num',
-      }
+      },
+    },
+  },
+  285: {
+    actualDenominator: {
+      sub: '全部工单数量',
+      main: {
+        unit: 'count',
+      },
+      notes: {
+        compare: '',
+        unit: 'count',
+      },
+    },
+    actualNumerator: {
+      sub: '完成总数量',
+      main: {
+        unit: 'count',
+      },
+      notes: {
+        compare: '',
+        unit: 'count',
+      },
+    },
+    actualTarget: {
+      sub: '完成率',
+      main: {
+        unit: 'percent',
+      },
+      notes: {
+        compare: '',
+        unit: 'percent',
+      },
     },
   },
   307: {
@@ -117,7 +185,7 @@ export default {
         compare: '较上年',
         unit: 'count',
       },
-    }
+    },
   },
   337: {
     actualTarget: {
@@ -128,12 +196,10 @@ export default {
       notes: {
         compare: '较上年',
         unit: 'area',
-      }
-    }
+      },
+    },
   },
-
-}
-
+};
 
 /**
  * 数据块 - 数据联动关系

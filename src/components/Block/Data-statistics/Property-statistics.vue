@@ -1,7 +1,7 @@
 <!--物业费相关 - 统计  数据box-->
 <template>
   <ns-row class="head" justify="space-between" gutter="5">
-    <ns-skeleton row="3" :loading="!finalData.length">
+    <ns-skeleton :row="idList.length" :loading="!finalData.length">
       <ns-col
       :span="24 / finalData.length"
       v-for="(item, itemIndex) in finalData"
@@ -32,23 +32,16 @@
     mixins: [Mixins, baseMixins],
     props: {
       activeName: [Number, String],
+      idList: {
+        type: Array,
+        default: () => []
+      }
     },
     components: {
       Skeleton
     },
     data() {
       return {
-
-        /**
-         * 查询入参指标队列
-         * 物业费收缴率  - 256 （物业费应收/物业费实收)
-         * 本年欠费 - 275
-         * 往年欠费 - 266
-         * 往年欠费收缴 - 266
-         * 往年欠费收缴率 - 266
-         * @type {string[]}
-         */
-        ids_request: ['256', '275', '266'],
         allBoxData: [],
       }
     },
@@ -80,7 +73,7 @@
       getDataBox() {
 
         //入参
-        const query = this.ids_request.map(i => {
+        const query = [...new Set(this.idList.map(i => i.id))].map(i => {
           return this.getQueryByFactory({
             targetItemID: i,
           });
@@ -92,23 +85,8 @@
           console.log('请求返回数据:');
           console.log(res);
 
-          /**
-           * 通过 id 和 key 查询控制器，锁定渲染配置对象，输出渲染数据队列
-           * @type {*[]}
-           */
-          const ids_render = [
-            {id: '256', key: 'actualDenominator'},//计划总营收
-            {id: '256', key: 'actualNumerator'},//实际总营收
-            {id: '256', key: 'actualTarget'},//总营收完成率
-            {id: '275', key: 'actualTarget'},//本年欠费
-            {id: '266', key: 'actualDenominator'},//往年欠费
-            {id: '266', key: 'actualNumerator'},//往年欠费收缴
-            {id: '266', key: 'actualTarget'},//往年欠费收缴率
-          ];
-
-
           //分段数据 - 单个数据块的数据处理
-          this.allBoxData = singleBoxDataHandle(res, ids_render);
+          this.allBoxData = singleBoxDataHandle(res, this.idList);
 
 
           console.log('最终赋值-最终赋值');

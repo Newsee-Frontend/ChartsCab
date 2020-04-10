@@ -1,0 +1,104 @@
+<!--首页-->
+<template>
+  <ns-layout :title="departmentName">
+    <ns-data-statistics class="container-block" :idList="idList1"></ns-data-statistics>
+    <ns-block-head>
+      <template #main>客户投诉变化趋势</template>
+    </ns-block-head>
+    <ns-line-charts id="complaints" :data="lineChartData"></ns-line-charts>
+    <ns-block-head>
+      <template #main>客服工单数量</template>
+    </ns-block-head>
+    <ns-property-statistics :activeName="0" :idList="idList2"></ns-property-statistics>
+    <div class="pie-chart-container">
+      <ns-pie-charts centerText="受理电话<br>占比类别" :data="pieChartData"></ns-pie-charts>
+    </div>
+  </ns-layout>
+</template>
+
+<script>
+import create from '../../utils/core/create';
+import { dataStatistics, propertyStatistics, BlockHead, lineCharts, pieCharts } from './index';
+import baseMixins from '../../mixins/index';
+import { getData } from '../../service/fetch';
+import { getAllMonths } from '../../utils/library/date';
+export default create({
+  name: 'Employee',
+  mixins: [baseMixins],
+  components: {
+    dataStatistics,
+    propertyStatistics,
+    BlockHead,
+    lineCharts,
+    pieCharts,
+  },
+  data() {
+    return {
+      idList1: [
+        { id: '20', key: 'actualTarget' }, //业主满意率
+        { id: '205', key: 'actualTarget' }, //客户投诉数量
+        { id: '206', key: 'actualTarget' }, //投诉完成率
+      ],
+      idList2: [
+        { id: '285', key: 'actualDenominator' }, //全部工单数量
+        { id: '285', key: 'actualNumerator' }, //完成总数量
+        { id: '285', key: 'actualTarget' }, //完成率
+      ],
+      lineChartData: [],
+      pieChartData: [],
+    };
+  },
+  methods: {
+    getLineChartData(val) {
+      const line_requestId = 205;
+      let params = [
+        this.getQueryByFactory({
+          targetItemID: line_requestId,
+          repotyType: 3,
+          date: getAllMonths(2),
+        }),
+      ];
+      console.log('折线图', params);
+      getData(params).then(res => {
+        this.lineChartData = res[line_requestId].map(i => ({
+          time: i.date.slice(4),
+          value: Number(i['actualTarget']),
+          type: i.date.slice(0, 4),
+        }));
+      });
+    },
+    getPieChartData(val) {
+      const pie_requestId = 76;
+      let params = [
+        this.getQueryByFactory({
+          targetItemID: pie_requestId,
+          repotyType: 0,
+          date: this.isCurrentYear ? '' : this.global_year,
+          childTargetName: 'all',
+        }),
+      ];
+      console.log('饼图', params);
+      getData(params).then(res => {
+        this.pieChartData = res[pie_requestId].map(i => ({
+          name: i.targetItem,
+          value: i.actualTarget,
+        }));
+      });
+    },
+    refresh() {
+      this.isCurrentYear && this.getLineChartData();
+      this.getPieChartData();
+    },
+  },
+  created() {
+    this.getLineChartData();
+    this.getPieChartData();
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+.pie-chart-container {
+  padding: 16px 0;
+}
+</style>

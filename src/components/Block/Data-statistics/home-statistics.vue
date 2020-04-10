@@ -15,7 +15,7 @@
     </ns-block-head>
 
     <ns-row class="content-area" gutter="5">
-      <ns-skeleton row="6" :loading="!finalData.length">
+      <ns-skeleton :row="idList.length" :loading="!finalData.length">
         <ns-col span="8" v-for="(item, index) in finalData" :key="index">
           <ns-data-box :content="item.content" :color="item.color"></ns-data-box>
         </ns-col>
@@ -39,17 +39,17 @@
     components: {
       Skeleton
     },
+    props: {
+      /**
+       * 通过 id 和 key 查询控制器，锁定渲染配置对象，输出渲染数据队列
+       */
+      idList: {
+        type: Array,
+        default: () => []
+      }
+    },
     data() {
       return {
-        /**
-         * 查询入参指标队列
-         * 总营收完成率  - 80 （包含计划总营收/实际总营收)
-         * 项目数量 - 307
-         * 项目面积 - 14
-         * 储备面积 - 337
-         * @type {string[]}
-         */
-        ids_request: ['80', '307', '14', '337'],
         finalData: [],
       };
     },
@@ -60,7 +60,7 @@
 
     computed: {
       query() {
-        return this.ids_request.map(i => {
+        return [...new Set(this.idList.map(i => i.id))].map(i => {
           return this.getQueryByFactory({
             targetItemID: i,
           });
@@ -84,22 +84,8 @@
           console.log('请求返回数据:');
           console.log(res);
 
-          /**
-           * 通过 id 和 key 查询控制器，锁定渲染配置对象，输出渲染数据队列
-           * @type {*[]}
-           */
-          const ids_render = [
-            {id: '80', key: 'actualDenominator'},//计划总营收
-            {id: '80', key: 'actualNumerator'},//实际总营收
-            {id: '80', key: 'actualTarget'},//总营收完成率
-            {id: '307', key: 'actualTarget'},//项目数量
-            {id: '14', key: 'actualTarget'},//项目面积
-            {id: '337', key: 'actualTarget'},//储备面积
-          ];
-
-
           //分段数据 - 单个数据块的数据处理
-          const subdata = this.singleBoxDataHandle(res, ids_render);
+          const subdata = this.singleBoxDataHandle(res, this.idList);
 
           console.log('分段数据 - 单个数据块的数据处理');
           console.log(subdata);

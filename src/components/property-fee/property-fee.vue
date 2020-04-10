@@ -8,7 +8,7 @@
         :name="tabIndex"
         :key="tabIndex"
       >
-        <ns-property-statistics :activeName="activeName"></ns-property-statistics>
+        <ns-property-statistics :activeName="activeName" :idList="idList"></ns-property-statistics>
       </ns-tab>
     </ns-tabs>
 
@@ -106,6 +106,16 @@
 
         barData: [],
         orgData: [],
+
+        idList: [
+          {id: '256', key: 'actualDenominator'},//计划总营收
+          {id: '256', key: 'actualNumerator'},//实际总营收
+          {id: '256', key: 'actualTarget'},//总营收完成率
+          {id: '275', key: 'actualTarget'},//本年欠费
+          {id: '266', key: 'actualDenominator'},//往年欠费
+          {id: '266', key: 'actualNumerator'},//往年欠费收缴
+          {id: '266', key: 'actualTarget'},//往年欠费收缴率
+        ]
       };
     },
     methods: {

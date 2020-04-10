@@ -50,6 +50,10 @@ export default {
       type: String,
       default: '200px',
     },
+    centerText: {
+      type: String,
+      default: '收入',
+    },
   },
   data() {
     return {
@@ -156,10 +160,9 @@ export default {
       this.chart.guide().html({
         position: ['50%', '50%'],
         html: `<div style="text-align: center;">
-          <div style="font-size: ${216 / remUnit}px;color: #999;">收入</div>
-          <div style="font-size: ${288 / remUnit}px;color: #333;white-space: nowrap;">
-            <strong>${this.pieSum.toFixed(2)}</strong><span style="font-size: ${216 /
-          remUnit}px;color: #999;">${this.unit}</span>
+          <div style="font-size: ${216 / remUnit}px;color: #999;white-space: nowrap;">${this.centerText}</div>
+          <div style="font-size: ${288 / remUnit}px;color: #333;white-space: nowrap;${this.centerText !== '收入' ? 'display: none;' : ''}">
+            <strong>${this.pieSum.toFixed(2)}</strong><span style="font-size: ${216 / remUnit}px;color: #999;">${this.unit}</span>
           </div>
         </div>`,
       });

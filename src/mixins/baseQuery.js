@@ -17,7 +17,7 @@ export default {
   computed: {
     ...mapGetters(['global_year', 'isCurrentYear']),
     deadlineTitle(){
-      console.log(this.deadline, Math.max(...this.deadline));
+      // console.log(this.deadline, Math.max(...this.deadline));
       let deadlineTmp = this.deadline.length && Math.max(...this.deadline) ? getTime(Math.max(...this.deadline)) : '';
       return `截止: ${deadlineTmp}`;
     }
@@ -46,7 +46,7 @@ export default {
     },
 
     createBaseQuery(isNext) {
-      console.log(this.$store.state);
+      // console.log(this.$store.state);
       const targetLevel = getUrlParam('targetLevel') || 2;
       const departmentID = getUrlParam('departmentID');
 
