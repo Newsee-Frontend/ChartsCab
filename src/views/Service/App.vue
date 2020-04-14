@@ -70,7 +70,7 @@ export default create({
         a: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualTarget', label: '满意率', unit: '%' },
+            { value: 'actualTarget', label: '服务满意率', unit: '%' },
           ],
           key: '20',
           orderBy: 'actualTarget',
@@ -78,7 +78,7 @@ export default create({
         b: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualDenominator', label: '总数' },
+            { value: 'actualDenominator', label: '工单总数量' },
           ],
           key: '285',
           orderBy: 'actualDenominator',
@@ -86,7 +86,7 @@ export default create({
         c: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualTarget', label: '投诉数'},
+            { value: 'actualTarget', label: '工单投诉数量'},
           ],
           key: '338',
           orderBy: 'actualTarget',

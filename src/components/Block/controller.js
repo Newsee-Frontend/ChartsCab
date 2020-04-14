@@ -145,17 +145,17 @@ export default {
   },
   283: {
     actualDenominator: {
-      sub: '计划总营收',
+      sub: '总员工数',
       main: {
-        unit: 'num',
+        unit: 'person',
       },
       notes: {
         compare: '较上年',
-        unit: 'num',
+        unit: 'person',
       },
     },
     actualNumerator: {
-      sub: '实际总营收',
+      sub: '薪酬总支出',
       main: {
         unit: 'num',
       },
@@ -165,13 +165,13 @@ export default {
       },
     },
     actualTarget: {
-      sub: '总营收完成率',
+      sub: '薪酬平均支出',
       main: {
-        unit: 'percent',
+        unit: 'num',
       },
       notes: {
         compare: '较上月',
-        unit: 'percent',
+        unit: 'num',
       },
     },
   },

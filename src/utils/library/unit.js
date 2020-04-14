@@ -85,7 +85,11 @@ export const unitConvert = (num, type) => {
         num: num,
         unit: '%'
       };
-
+    case 'person':
+      return {
+        num: num,
+        unit: '人'
+      };
     default:
       break
   }

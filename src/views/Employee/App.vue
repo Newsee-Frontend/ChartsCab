@@ -5,13 +5,14 @@
     <ns-block-head>
       <template #main>员工构成情况</template>
     </ns-block-head>
+    <ns-employee-composition></ns-employee-composition>
     <ns-block-head>
       <template #main>薪资支出情况 (万元)</template>
     </ns-block-head>
     <ns-line-charts id="salary" :data="lineChartData"></ns-line-charts>
     <ns-position-info
       v-if="getUrlParam('targetLevel') !== '4'"
-      :titleText="['城市公司排名', '']"
+      :titleText="['城市公司排名', '单位: 人']"
       :tabList="tabList"
       :tables="tables"
       curDirname="Employee"
@@ -21,77 +22,58 @@
 
 <script>
 import create from '../../utils/core/create';
-import {
-  dataStatistics,
-  propertyStatistics,
-  BlockHead,
-  lineCharts,
-  pieCharts,
-  positionInfo,
-} from './index';
+import { dataStatistics, BlockHead, employeeComposition, lineCharts, positionInfo } from './index';
 import baseMixins from '../../mixins/index';
 import { getData } from '../../service/fetch';
 import { getAllMonths } from '../../utils/library/date';
 export default create({
-  name: 'Service',
+  name: 'Employee',
   mixins: [baseMixins],
-  components: {
-    dataStatistics,
-    propertyStatistics,
-    BlockHead,
-    lineCharts,
-    pieCharts,
-    positionInfo,
-  },
+  components: { dataStatistics, BlockHead, employeeComposition, lineCharts, positionInfo },
   data() {
     return {
       idList: [
-        { id: '283', key: 'actualDenominator' }, //业主满意率
-        { id: '283', key: 'actualNumerator' }, //客户投诉数量
-        { id: '283', key: 'actualTarget' }, //投诉完成率
+        { id: '283', key: 'actualDenominator' }, //总员工数
+        { id: '283', key: 'actualNumerator' }, //薪酬总支出
+        { id: '283', key: 'actualTarget' }, //薪酬平均支出
       ],
       lineChartData: [],
-      pieChartData: [],
       tabList: [
-        { title: '服务满意率', name: 'a' },
-        { title: '工单全部数量', name: 'b' },
-        { title: '工单投诉数量', name: 'c' },
+        { title: '员工人数', name: 'a' },
+        { title: '员工入职率', name: 'b' },
+        { title: '员工离职率', name: 'c' },
       ],
       tables: {
         a: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualTarget', label: '服务满意率', unit: '%' },
+            { value: 'actualDenominator', label: '员工人数' },
           ],
-          key: '20',
-          orderBy: 'actualTarget',
+          key: '283',
+          orderBy: 'actualDenominator',
         },
         b: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualDenominator', label: '总数' },
-            { value: 'actualTarget', label: '完成率', unit: '%' },
-            { value: 'actualNumerator', label: '完成数' },
+            { value: 'actualTarget', label: '员工入职率', unit: '%' },
           ],
-          key: '285',
-          orderBy: 'actualNumerator',
+          key: '222',
+          orderBy: 'actualTarget',
         },
         c: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualDenominator', label: '总数' },
-            { value: 'actualTarget', label: '完成率', unit: '%' },
-            { value: 'actualNumerator', label: '完成数' },
+            { value: 'actualTarget', label: '员工离职率', unit: '%' },
           ],
-          key: '206',
-          orderBy: 'actualNumerator',
+          key: '224',
+          orderBy: 'actualTarget',
         },
       },
     };
   },
   methods: {
     getLineChartData(val) {
-      const line_requestId = 205;
+      const line_requestId = 283;
       let params = [
         this.getQueryByFactory({
           targetItemID: line_requestId,
@@ -103,37 +85,17 @@ export default create({
       getData(params).then(res => {
         this.lineChartData = res[line_requestId].map(i => ({
           time: i.date.slice(4),
-          value: Number(i['actualTarget']),
+          value: Number(i['actualNumerator']),
           type: i.date.slice(0, 4),
-        }));
-      });
-    },
-    getPieChartData(val) {
-      const pie_requestId = 76;
-      let params = [
-        this.getQueryByFactory({
-          targetItemID: pie_requestId,
-          repotyType: 0,
-          date: this.isCurrentYear ? '' : this.global_year,
-          childTargetName: 'all',
-        }),
-      ];
-      console.log('饼图', params);
-      getData(params).then(res => {
-        this.pieChartData = res[pie_requestId].map(i => ({
-          name: i.targetItem,
-          value: i.actualTarget,
         }));
       });
     },
     refresh() {
       this.isCurrentYear && this.getLineChartData();
-      this.getPieChartData();
     },
   },
   created() {
     this.getLineChartData();
-    this.getPieChartData();
   },
 });
 </script>
