@@ -121,6 +121,6 @@
 
 <style rel="stylesheet/scss" lang="scss">
   .manager-block{
-    margin-top: 15px;
+    margin-top: 5px;
   }
 </style>

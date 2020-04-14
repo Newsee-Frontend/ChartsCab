@@ -44,7 +44,7 @@
         <ns-icon
           name="ellipsis"
           style="line-height: inherit;"
-          @click="junmp('../Details/index.html')"
+          @click="junmp('../HomeDetails/index.html')"
         />
       </template>
     </ns-cell>

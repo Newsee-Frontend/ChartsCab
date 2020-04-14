@@ -177,7 +177,7 @@ export default {
   },
   285: {
     actualDenominator: {
-      sub: '全部工单数量',
+      sub: '全部工单数',
       main: {
         unit: 'count',
       },
@@ -187,7 +187,7 @@ export default {
       },
     },
     actualNumerator: {
-      sub: '完成总数量',
+      sub: '完成总数',
       main: {
         unit: 'count',
       },

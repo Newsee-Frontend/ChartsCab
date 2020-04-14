@@ -1,6 +1,6 @@
 <!--块 - 标题区域-->
 <template>
-  <div class="block-head clear">
+  <div class="block-head clear"  :style="{marginTop: !!$slots.main ? '10px' : ''}">
     <div class="block-head__main fl" v-show="!!$slots.main">
       <slot name="main"></slot>
     </div>

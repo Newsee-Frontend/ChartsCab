@@ -9,7 +9,7 @@
       :tabList="tabList"
       :tables="tables"
       curDirname="Home"
-      detailDirname="Details"
+      detailDirname="HomeDetails"
     ></ns-position-info>
   </ns-layout>
 </template>

@@ -9,7 +9,7 @@
     <ns-block-head>
       <template #main>客服工单数量</template>
     </ns-block-head>
-    <ns-property-statistics :activeName="0" :idList="idList2"></ns-property-statistics>
+    <ns-property-statistics class="work-order" :activeName="0" :idList="idList2"></ns-property-statistics>
     <div class="pie-chart-container">
       <ns-pie-charts centerText="受理电话<br>占比类别" :data="pieChartData"></ns-pie-charts>
     </div>
@@ -63,14 +63,14 @@ export default create({
       pieChartData: [],
       tabList: [
         { title: '服务满意率', name: 'a' },
-        { title: '工单全部数量', name: 'b' },
+        { title: '工单总数量', name: 'b' },
         { title: '工单投诉数量', name: 'c' },
       ],
       tables: {
         a: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualTarget', label: '服务满意率', unit: '%' },
+            { value: 'actualTarget', label: '满意率', unit: '%' },
           ],
           key: '20',
           orderBy: 'actualTarget',
@@ -79,21 +79,17 @@ export default create({
           list: [
             { value: 'departmentName', label: '区域名称' },
             { value: 'actualDenominator', label: '总数' },
-            { value: 'actualTarget', label: '完成率', unit: '%' },
-            { value: 'actualNumerator', label: '完成数' },
           ],
           key: '285',
-          orderBy: 'actualNumerator',
+          orderBy: 'actualDenominator',
         },
         c: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualDenominator', label: '总数' },
-            { value: 'actualTarget', label: '完成率', unit: '%' },
-            { value: 'actualNumerator', label: '完成数' },
+            { value: 'actualTarget', label: '投诉数'},
           ],
-          key: '206',
-          orderBy: 'actualNumerator',
+          key: '338',
+          orderBy: 'actualTarget',
         },
       },
     };
@@ -148,10 +144,10 @@ export default create({
 </script>
 
 <style lang="scss" scoped>
+.work-order{
+  margin-top: 5px;
+}
 .pie-chart-container {
   padding: 16px 0;
-}
-#complaints{
-  margin-bottom: 10px;
 }
 </style>
