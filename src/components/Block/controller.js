@@ -59,11 +59,11 @@ export default {
     actualTarget: {
       sub: '客户投诉数量',
       main: {
-        unit: 'num',
+        unit: 'count',
       },
       notes: {
         compare: '',
-        unit: 'num',
+        unit: 'count',
       },
     },
   },
@@ -140,6 +140,38 @@ export default {
       sub: '本年欠收',
       main: {
         unit: 'num',
+      },
+    },
+  },
+  283: {
+    actualDenominator: {
+      sub: '计划总营收',
+      main: {
+        unit: 'num',
+      },
+      notes: {
+        compare: '较上年',
+        unit: 'num',
+      },
+    },
+    actualNumerator: {
+      sub: '实际总营收',
+      main: {
+        unit: 'num',
+      },
+      notes: {
+        compare: '较上月',
+        unit: 'num',
+      },
+    },
+    actualTarget: {
+      sub: '总营收完成率',
+      main: {
+        unit: 'percent',
+      },
+      notes: {
+        compare: '较上月',
+        unit: 'percent',
       },
     },
   },

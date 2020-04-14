@@ -151,4 +151,7 @@ export default create({
 .pie-chart-container {
   padding: 16px 0;
 }
+#complaints{
+  margin-bottom: 10px;
+}
 </style>

@@ -1,7 +1,7 @@
 <!--块 - 标题区域-->
 <template>
   <div class="block-head clear">
-    <div class="block-head__main fl">
+    <div class="block-head__main fl" v-show="!!$slots.main">
       <slot name="main"></slot>
     </div>
     <div class="block-head__sub fl">
@@ -26,7 +26,6 @@
       font-size: 16px;
       font-weight: bold;
       height: 36px;
-      margin-right: 6px;
     }
 
     .block-head__sub, .block-head__right {

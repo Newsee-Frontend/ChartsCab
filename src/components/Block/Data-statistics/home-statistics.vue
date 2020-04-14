@@ -124,11 +124,25 @@
   .data-statistics {
     .time-picker {
       margin-top: 7px;
-      margin-right: 10px;
     }
 
-    .time-title{
-      margin-left: 6px;
+    .content-area{
+      overflow: hidden;
+      margin: 0 !important;
+      >div{
+        position: relative;
+        padding: 0 !important;
+        &:after{
+          content: '';
+          position: absolute;
+          top: 50%;
+          right: -1px;
+          width: 1px;
+          height: 22px;
+          background: #EAEAEA;
+          transform: translateY(-50%);
+        }
+      }
     }
   }
 </style>

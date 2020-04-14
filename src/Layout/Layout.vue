@@ -62,11 +62,11 @@ $top_gap: 102px;
     border-radius: 12px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
     margin: 0 12px;
+    padding: 0 12px;
     height: calc(100vh - #{$top_gap});
 
     .container-block {
       padding-top: 5px;
-      margin-bottom: 10px;
     }
   }
 }

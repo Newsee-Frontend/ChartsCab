@@ -177,18 +177,16 @@
   @import '../../../style/tab.scss';
 
   .data-statistics {
-    .detail-head{
-      padding: 0 12px;
-    }
-    .body-area {
-      padding: 0 12px;
-    }
     .tab-line {
+      .bg-radius-tab{
+        width: calc(100% + 24px);
+        margin-left: -12px;
+      }
       min-height: 44px;
       .time-picker {
         position: absolute;
         top: 0px;
-        right: 5px;
+        right: 0;
         margin-top: 10px;
         display: flex;
       }
