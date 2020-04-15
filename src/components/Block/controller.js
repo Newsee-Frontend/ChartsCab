@@ -5,20 +5,18 @@ export default {
       main: {
         unit: 'area',
       },
-      notes: {
-        compare: '较上年',
-        unit: 'area',
-      },
+      notes: [
+        {
+          compare: '较上年',
+          unit: 'area',
+        },
+      ],
     },
   },
   20: {
     actualTarget: {
       sub: '业主满意率',
       main: {
-        unit: 'percent',
-      },
-      notes: {
-        compare: '',
         unit: 'percent',
       },
     },
@@ -29,28 +27,16 @@ export default {
       main: {
         unit: 'num',
       },
-      notes: {
-        compare: '较上年',
-        unit: 'num',
-      },
     },
     actualNumerator: {
       sub: '实际总营收',
       main: {
         unit: 'num',
       },
-      notes: {
-        compare: '较上月',
-        unit: 'num',
-      },
     },
     actualTarget: {
       sub: '总营收完成率',
       main: {
-        unit: 'percent',
-      },
-      notes: {
-        compare: '较上月',
         unit: 'percent',
       },
     },
@@ -61,20 +47,12 @@ export default {
       main: {
         unit: 'count',
       },
-      notes: {
-        compare: '',
-        unit: 'count',
-      },
     },
   },
   206: {
     actualTarget: {
       sub: '投诉完成率',
       main: {
-        unit: 'percent',
-      },
-      notes: {
-        compare: '',
         unit: 'percent',
       },
     },
@@ -91,18 +69,10 @@ export default {
       main: {
         unit: 'num',
       },
-      notes: {
-        compare: '较上年',
-        unit: 'num',
-      },
     },
     actualTarget: {
       sub: '物业费收缴率',
       main: {
-        unit: 'percent',
-      },
-      notes: {
-        compare: '较上月',
         unit: 'percent',
       },
     },
@@ -119,18 +89,10 @@ export default {
       main: {
         unit: 'num',
       },
-      notes: {
-        compare: '较上月',
-        unit: 'num',
-      },
     },
     actualTarget: {
       sub: '往年欠费收缴率',
       main: {
-        unit: 'percent',
-      },
-      notes: {
-        compare: '较上月',
         unit: 'percent',
       },
     },
@@ -149,28 +111,16 @@ export default {
       main: {
         unit: 'person',
       },
-      notes: {
-        compare: '较上年',
-        unit: 'person',
-      },
     },
     actualNumerator: {
       sub: '薪酬总支出',
       main: {
         unit: 'num',
       },
-      notes: {
-        compare: '较上月',
-        unit: 'num',
-      },
     },
     actualTarget: {
       sub: '薪酬平均支出',
       main: {
-        unit: 'num',
-      },
-      notes: {
-        compare: '较上月',
         unit: 'num',
       },
     },
@@ -181,28 +131,16 @@ export default {
       main: {
         unit: 'count',
       },
-      notes: {
-        compare: '',
-        unit: 'count',
-      },
     },
     actualNumerator: {
       sub: '完成总数',
       main: {
         unit: 'count',
       },
-      notes: {
-        compare: '',
-        unit: 'count',
-      },
     },
     actualTarget: {
       sub: '完成率',
       main: {
-        unit: 'percent',
-      },
-      notes: {
-        compare: '',
         unit: 'percent',
       },
     },
@@ -213,20 +151,12 @@ export default {
       main: {
         unit: 'count',
       },
-      notes: {
-        compare: '较上年',
-        unit: 'count',
-      },
     },
   },
   337: {
     actualTarget: {
       sub: '计划总营收',
       main: {
-        unit: 'area',
-      },
-      notes: {
-        compare: '较上年',
         unit: 'area',
       },
     },

@@ -36,18 +36,22 @@ export const singleBoxDataHandle = (data, idList) => {
 
     if (configure) {
       const unitConvertVal = unitConvert(rawData, configure.main.unit);//数值单位转换
-
       return {
         sub: configure.sub,
         main: {
           num: unitConvertVal.num,
           unit: unitConvertVal.unit,
         },
-        notes: {
-          compare: configure.notes ? configure.notes.compare : '',
-          num: configure.notes ? -0.15 : '',
-          unit: configure.notes ? '万方' : '',
-        }
+        notes: (configure.notes || []).map(item => {
+          let mix = unitConvert(item.num, item.unit);
+          mix.num = 12.44;
+          configure.notes.length > 1 && (mix.num = mix.num.toFixed(0));
+          return {
+            compare: item.compare,
+            num: mix.num,
+            unit: mix.unit,
+          }
+        })
       };
 
     }

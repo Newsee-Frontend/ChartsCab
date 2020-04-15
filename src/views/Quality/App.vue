@@ -14,7 +14,7 @@
   import baseMixins from '../../mixins/index';
 
   export default create({
-    name: 'ManagerCab',
+    name: 'Quality',
     mixins: [baseMixins],
     components: {
       PositionInfo,

@@ -84,28 +84,6 @@ export default {
 
       this.chart.tooltip(false);
       this.chart.axis(false);
-      this.chart.legend({
-        position: 'right',
-        offsetX: this.isBlank ? -30 : 0,
-        offsetY: 6,
-        marker: {
-          radius: 6,
-        },
-        nameStyle: {
-          fill: '#333',
-          fontSize: '12',
-        },
-        valueStyle: {
-          fill: '#333',
-          fontSize: '12',
-        },
-        itemMarginBottom: 18,
-        wordSpace: 4, //marker和文本之间的间距
-        itemFormatter: val => {
-          return this.isBlank ? val : (val + '  ' + this.pieMap[val].toFixed(2) + this.unit);
-        },
-        clickable: false,
-      });
 
       this.chart.coord('polar', {
         transposed: true,
@@ -152,6 +130,28 @@ export default {
     paint(val) {
       this.chart.clear();
       this.chart.source(this.isBlank? [{ name: this.blankText, value: 200, const: 'const' }] : this.pieData);
+      this.chart.legend({
+        position: 'right',
+        offsetX: this.isBlank ? -30 : 0,
+        offsetY: 6,
+        marker: {
+          radius: 6,
+        },
+        nameStyle: {
+          fill: '#333',
+          fontSize: '12',
+        },
+        valueStyle: {
+          fill: '#333',
+          fontSize: '12',
+        },
+        itemMarginBottom: 18,
+        wordSpace: 4, //marker和文本之间的间距
+        itemFormatter: val => {
+          return this.isBlank ? val : (val + '  ' + this.pieMap[val].toFixed(2) + this.unit);
+        },
+        clickable: false,
+      });
       this.chart
         .interval()
         .position('const*value')

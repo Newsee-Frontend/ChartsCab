@@ -1,6 +1,6 @@
 <template>
   <div class="employee-composition">
-    <!-- <ns-column-bar-charts :data="barData" id="propertyFeeChart"></ns-column-bar-charts> -->
+    <ns-pie-charts centerText="员工构成<br>情况" unit="%" :data="pieData"></ns-pie-charts>
     <div class="chart-select">
       <div
         class="chart-select__item"
@@ -16,14 +16,14 @@
 
 <script>
 import create from '../../utils/core/create';
-// import columnBarCharts from '../Charts/columnBarCharts/columnBarCharts';
+import pieCharts from '../Charts/pieCharts/pieCharts';
 import { getData } from '../../service/fetch';
 import baseMixins from '../../mixins/index';
 
 export default create({
   name: 'employee-composition',
   components: {
-    // columnBarCharts
+    pieCharts,
   },
 
   mixins: [baseMixins],
@@ -35,49 +35,41 @@ export default create({
     return {
       activeIndex: 0,
       tabList: ['员工学历<br>构成', '员工司龄<br>构成', '员工年龄<br>构成'],
-      barData: [],
       orgData: [],
-
-      idList: [
-        { id: '209', key: 'actualDenominator' }, //计划总营收
-        { id: '211', key: 'actualNumerator' }, //实际总营收
-        { id: '210', key: 'actualTarget' }, //总营收完成率
-      ],
+      pieData: [],
+      ids: ['209', '211', '210'],
     };
   },
   methods: {
     //重刷
     refresh() {
-      this.getColumnBarData();
+      this.getPieData();
     },
 
     changeTab(val) {
       this.activeIndex = val;
-      // let attrs = ['actualDenominator', 'actualNumerator', 'actualTarget'];
-      // let index = this.activeFeeType[this.activeName];
-      // this.barData = this.orgData[this.ids[this.activeName]].map(i => ({
-      //   name: i.departmentName,
-      //   value: Number(i[attrs[index]]),
-      // }));
+      this.pieData = this.orgData[this.ids[this.activeIndex]].map(i => ({
+        name: i.targetItem,
+        value: Number(i.actualTarget),
+      }));
     },
 
-    getColumnBarData() {
-      // let params = this.ids.map(i => {
-      //   return this.getQueryByFactory({
-      //     targetItemID: i,
-      //     childTargetName: 'all',
-      //     repotyType: '3',
-      //   }, true);
-      // });
-      // console.log('条形图NEXT', params);
-      // getData(params).then(res => {
-      //   this.ids.forEach((item, index) => {
-      //     this.tabData[index].showBtn = res[item].length > 10 ? true : false;
-      //     this.tabData[index].isLimited = this.tabData[index].showBtn;
-      //   });
-      //   this.orgData = res;
-      //   this.changeTab2();
-      // });
+    getPieData() {
+      let params = this.ids.map(i => {
+        return this.getQueryByFactory({
+          targetItemID: i,
+          childTargetName: 'all',
+          repotyType: '3',
+          date: this.isCurrentYear
+            ? this.global_year + (new Date().getMonth() + 1).toString().padStart(2, '0')
+            : this.global_year + '12',
+        });
+      });
+      console.log('饼图', params);
+      getData(params).then(res => {
+        this.orgData = res;
+        this.changeTab(this.activeIndex);
+      });
     },
   },
 

@@ -5,11 +5,14 @@
     <p class="main" :style="{ color: color }">
       <span class="main_num" :style="{ 'font-size': convertFontSize }">{{ content.main.num }}</span><span class="main_unit">{{ content.main.unit }}</span>
     </p>
-    <p class="notes" v-if="content.notes">
-      <span class="notes_compare">{{ content.notes.compare }}</span>
-
-      <span class="notes_content" :style="{ color: notes_num_color }">{{ notes_content }}</span>
-    </p>
+    <div class="notes" :style="{ 'justify-content': content.notes.length > 1 ? 'space-between' : 'center' }">
+      <p v-for="(item, index) in content.notes" :key="index">
+        <span class="notes_compare">{{ item.compare }}</span>
+        <span class="notes_content" :style="{ color: item.num >= 0 ? palette['green'].color : palette['red'].color }">
+          {{ item.num + item.unit }}
+        </span>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -31,28 +34,21 @@ export default {
             num: '',
             unit: '',
           },
-          notes: {
+          notes: [{
             compare: '',
             num: '',
             unit: '',
-          },
+          }],
         };
       },
     },
   },
+  data() {
+    return {
+      palette
+    }
+  },
   computed: {
-    notes_num() {
-      return this.content.notes.num || '';
-    },
-    notes_unit() {
-      return this.content.notes.unit || '';
-    },
-    notes_content() {
-      return `${this.notes_num}${this.notes_unit}`;
-    },
-    notes_num_color() {
-      return this.notes_num > 0 ? palette['green'].color : palette['red'].color;
-    },
     convertFontSize() {
       const px = (24 / this.perNum) * 4 - 4;
       const rem = px / remUnit;
@@ -65,14 +61,13 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .data-box {
   padding: 10px 0;
-  margin-bottom: 5px;
   box-sizing: border-box;
   text-align: center;
   p.sub {
     font-size: 10px;
     color: rgba(102, 102, 102, 1);
     line-height: 15px;
-    margin-bottom: 2px;
+    // margin-bottom: 2px;
   }
   p.main {
     .main_num {
@@ -86,13 +81,17 @@ export default {
       font-weight: 400;
     }
   }
-  p.notes {
+  div.notes {
+    display: flex;
     font-size: 8px;
     font-weight: 400;
     color: rgba(127, 127, 127, 1);
     height: 12px;
     line-height: 12px;
     margin-top: 3px;
+    >p{
+      display: inline-block;
+    }
   }
 }
 </style>

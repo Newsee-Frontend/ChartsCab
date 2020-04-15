@@ -132,6 +132,7 @@
       >div{
         position: relative;
         padding: 0 !important;
+        margin-bottom: 5px;
         &:after{
           content: '';
           position: absolute;
