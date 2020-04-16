@@ -1,7 +1,18 @@
 <template>
   <div class="employee-composition">
+    <ns-tabs
+      swipeable
+      class="line-tab"
+      line-width="84px"
+      line-height="2px"
+      v-model="activeIndex"
+      @change="changeTab"
+    >
+      <ns-tab v-for="(tab, tabIndex) in tabList" :title="tab" :name="tabIndex" :key="tabIndex">
+      </ns-tab>
+    </ns-tabs>
     <ns-pie-charts centerText="员工构成<br>情况" unit="%" :data="pieData"></ns-pie-charts>
-    <div class="chart-select">
+    <!-- <div class="chart-select">
       <div
         class="chart-select__item"
         :class="index === activeIndex ? 'active' : ''"
@@ -10,12 +21,13 @@
         v-html="item"
         @click="changeTab(index)"
       ></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import create from '../../utils/core/create';
+import { Tab, Tabs } from 'vant';
 import pieCharts from '../Charts/pieCharts/pieCharts';
 import { getData } from '../../service/fetch';
 import baseMixins from '../../mixins/index';
@@ -23,6 +35,8 @@ import baseMixins from '../../mixins/index';
 export default create({
   name: 'employee-composition',
   components: {
+    Tab,
+    Tabs,
     pieCharts,
   },
 
@@ -34,7 +48,7 @@ export default create({
   data() {
     return {
       activeIndex: 0,
-      tabList: ['员工学历<br>构成', '员工司龄<br>构成', '员工年龄<br>构成'],
+      tabList: ['员工学历构成', '员工司龄构成', '员工年龄构成'],
       orgData: [],
       pieData: [],
       ids: ['209', '211', '210'],

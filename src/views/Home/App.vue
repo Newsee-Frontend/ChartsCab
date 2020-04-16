@@ -5,7 +5,7 @@
     <ns-property-fee></ns-property-fee>
     <ns-revenue-chart></ns-revenue-chart>
     <ns-position-info
-      :titleText="['经营指标排名', '单位: 万元']"
+      :titleText="[getUrlParam('targetLevel') !== '1' ? '城市公司排名' : '项目服务排名', '单位: 万元']"
       :tabList="tabList"
       :tables="tables"
       curDirname="Home"

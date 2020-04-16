@@ -5,7 +5,7 @@
     <p class="main" :style="{ color: color }">
       <span class="main_num" :style="{ 'font-size': convertFontSize }">{{ content.main.num }}</span><span class="main_unit">{{ content.main.unit }}</span>
     </p>
-    <div class="notes" :style="{ 'justify-content': content.notes.length > 1 ? 'space-between' : 'center' }">
+    <div class="notes" v-show="content.notes.length" :style="{ 'justify-content': content.notes.length > 1 ? 'space-between' : 'center' }">
       <p v-for="(item, index) in content.notes" :key="index">
         <span class="notes_compare">{{ item.compare }}</span>
         <span class="notes_content" :style="{ color: item.num >= 0 ? palette['green'].color : palette['red'].color }">

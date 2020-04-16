@@ -1,42 +1,91 @@
 <!--首页-->
 <template>
   <ns-layout :title="departmentName">
-    <ns-data-statistics class="container-block" :idList="idList"></ns-data-statistics>
-    <ns-property-fee></ns-property-fee>
-    <ns-revenue-chart></ns-revenue-chart>
-    <ns-position-info></ns-position-info>
+    <ns-data-statistics class="container-block" columns="2" :idList="idList"></ns-data-statistics>
+    <ns-block-head>
+      <template #main>客户投诉变化趋势</template>
+    </ns-block-head>
+    <ns-property-statistics
+      class="quality-data"
+      :activeName="0"
+      :idList="idList2"
+    ></ns-property-statistics>
+    <ns-block-head>
+      <template #main>客服工单数量</template>
+    </ns-block-head>
+    <ns-property-statistics
+      class="quality-data"
+      :activeName="0"
+      :idList="idList3"
+    ></ns-property-statistics>
+    <ns-position-info
+      v-if="getUrlParam('targetLevel') !== '4'"
+      :titleText="[getUrlParam('targetLevel') !== '1' ? '城市公司排名' : '项目服务排名']"
+      :tabList="tabList"
+      :tables="tables"
+      curDirname="Quality"
+    ></ns-position-info>
   </ns-layout>
 </template>
 
 <script>
-  import create from '../../utils/core/create';
-  import { dataStatistics, propertyFee, revenueChart, PositionInfo } from './index';
-  import baseMixins from '../../mixins/index';
+import create from '../../utils/core/create';
+import { dataStatistics, BlockHead, propertyStatistics, PositionInfo } from './index';
+import baseMixins from '../../mixins/index';
 
-  export default create({
-    name: 'Quality',
-    mixins: [baseMixins],
-    components: {
-      PositionInfo,
-      revenueChart,
-      dataStatistics,
-      propertyFee,
-    },
-    data() {
-      return {
-        idList: [
-          { id: '80', key: 'actualDenominator' }, //计划总营收
-          { id: '80', key: 'actualNumerator' }, //实际总营收
-          { id: '80', key: 'actualTarget' }, //总营收完成率
-          { id: '307', key: 'actualTarget' }, //项目数量
-          { id: '14', key: 'actualTarget' }, //项目面积
-          { id: '337', key: 'actualTarget' }, //储备面积
-        ],
-      };
-    },
-  });
+export default create({
+  name: 'Quality',
+  mixins: [baseMixins],
+  components: {
+    dataStatistics,
+    BlockHead,
+    propertyStatistics,
+    PositionInfo,
+  },
+  data() {
+    return {
+      idList: [
+        { id: '22', key: 'actualTarget' }, //督导完成合格率
+        { id: '32', key: 'actualTarget' }, //PDA巡检完成率
+      ],
+      idList2: [
+        { id: '28', key: 'actualDenominator' }, //
+        { id: '28', key: 'actualNumerator' }, //
+        { id: '28', key: 'actualTarget' }, //
+      ],
+      idList3: [
+        { id: '32', key: 'actualDenominator' }, //
+        { id: '32', key: 'actualNumerator' }, //
+        { id: '32', key: 'actualTarget' }, //
+      ],
+      tabList: [
+        { title: '督导完成率', name: 'a' },
+        { title: 'PDA巡检完成率', name: 'b' },
+      ],
+      tables: {
+        a: {
+          list: [
+            { value: 'departmentName', label: '区域名称' },
+            { value: 'actualTarget', label: '督导完成率', unit: '%' },
+          ],
+          key: '22',
+          orderBy: 'actualTarget',
+        },
+        b: {
+          list: [
+            { value: 'departmentName', label: '区域名称' },
+            { value: 'actualTarget', label: 'PDA巡检完成率', unit: '%' },
+          ],
+          key: '32',
+          orderBy: 'actualTarget',
+        },
+      },
+    };
+  },
+});
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-
+.quality-data {
+}
 </style>

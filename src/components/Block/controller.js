@@ -21,6 +21,54 @@ export default {
       },
     },
   },
+  22: {
+    actualTarget: {
+      sub: '督导完成合格率',
+      main: {
+        unit: 'percent',
+      },
+    },
+  },
+  28: {
+    actualDenominator: {
+      sub: '计划巡检数量',
+      main: {
+        unit: 'count',
+      },
+    },
+    actualNumerator: {
+      sub: '实际完成数量',
+      main: {
+        unit: 'count',
+      },
+    },
+    actualTarget: {
+      sub: '完成率',
+      main: {
+        unit: 'percent',
+      },
+    },
+  },
+  32: {
+    actualDenominator: {
+      sub: '计划巡检数量',
+      main: {
+        unit: 'count',
+      },
+    },
+    actualNumerator: {
+      sub: '实际完成数量',
+      main: {
+        unit: 'count',
+      },
+    },
+    actualTarget: {
+      sub: '完成率',
+      main: {
+        unit: 'percent',
+      },
+    },
+  },
   80: {
     actualDenominator: {
       sub: '计划总营收',

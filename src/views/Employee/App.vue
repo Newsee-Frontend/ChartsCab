@@ -12,7 +12,7 @@
     <ns-line-charts id="salary" :data="lineChartData"></ns-line-charts>
     <ns-position-info
       v-if="getUrlParam('targetLevel') !== '4'"
-      :titleText="['城市公司排名', '单位: 人']"
+      :titleText="[getUrlParam('targetLevel') !== '1' ? '城市公司排名' : '项目服务排名', '单位: 人']"
       :tabList="tabList"
       :tables="tables"
       curDirname="Employee"

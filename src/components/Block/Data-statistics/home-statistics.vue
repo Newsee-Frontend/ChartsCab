@@ -16,7 +16,7 @@
 
     <ns-row class="content-area" gutter="5">
       <ns-skeleton :row="idList.length" :loading="!finalData.length">
-        <ns-col span="8" v-for="(item, index) in finalData" :key="index">
+        <ns-col :span="24 / columns" v-for="(item, index) in finalData" :key="index">
           <ns-data-box :content="item.content" :color="item.color"></ns-data-box>
         </ns-col>
       </ns-skeleton>
@@ -46,6 +46,10 @@
       idList: {
         type: Array,
         default: () => []
+      },
+      columns: {
+        type: [Number, String],
+        default: 3
       }
     },
     data() {

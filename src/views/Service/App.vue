@@ -15,7 +15,7 @@
     </div>
     <ns-position-info
       v-if="getUrlParam('targetLevel') !== '4'"
-      :titleText="['城市公司排名', '单位: 个']"
+      :titleText="[getUrlParam('targetLevel') !== '1' ? '城市公司排名' : '项目服务排名', '单位: 个']"
       :tabList="tabList"
       :tables="tables"
       curDirname="Service"
@@ -78,10 +78,10 @@ export default create({
         b: {
           list: [
             { value: 'departmentName', label: '区域名称' },
-            { value: 'actualDenominator', label: '工单总数量' },
+            { value: 'actualTarget', label: '工单总数量' },
           ],
-          key: '285',
-          orderBy: 'actualDenominator',
+          key: '26',
+          orderBy: 'actualTarget',
         },
         c: {
           list: [
