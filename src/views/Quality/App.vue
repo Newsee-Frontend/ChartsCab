@@ -3,7 +3,7 @@
   <ns-layout :title="departmentName">
     <ns-data-statistics class="container-block" columns="2" :idList="idList"></ns-data-statistics>
     <ns-block-head>
-      <template #main>客户投诉变化趋势</template>
+      <template #main>品质巡检信息</template>
     </ns-block-head>
     <ns-property-statistics
       class="quality-data"
@@ -11,7 +11,7 @@
       :idList="idList2"
     ></ns-property-statistics>
     <ns-block-head>
-      <template #main>客服工单数量</template>
+      <template #main>工程巡检信息</template>
     </ns-block-head>
     <ns-property-statistics
       class="quality-data"
@@ -49,14 +49,14 @@ export default create({
         { id: '32', key: 'actualTarget' }, //PDA巡检完成率
       ],
       idList2: [
-        { id: '28', key: 'actualDenominator' }, //
-        { id: '28', key: 'actualNumerator' }, //
-        { id: '28', key: 'actualTarget' }, //
+        { id: '28', key: 'actualDenominator' },
+        { id: '28', key: 'actualNumerator' },
+        { id: '28', key: 'actualTarget' }, //品质巡检完成率
       ],
       idList3: [
-        { id: '32', key: 'actualDenominator' }, //
-        { id: '32', key: 'actualNumerator' }, //
-        { id: '32', key: 'actualTarget' }, //
+        { id: '32', key: 'actualDenominator' },
+        { id: '32', key: 'actualNumerator' },
+        { id: '32', key: 'actualTarget' }, //工程巡检完成率
       ],
       tabList: [
         { title: '督导完成率', name: 'a' },

@@ -23,16 +23,17 @@ export const getFullYearMonth = function(year) {
 }
 
 /**
- * @param num 获取最近几年的所有月份
+ * 获取某几年的所有月份
+ * @param num 年数
+ * @param startYear 开始年份
  */
-export const getAllMonths = function(num) {
-  let thisYear = new Date().getFullYear();
+export const getAllMonths = function(num, startYear) {
   let thisMonth = new Date().getMonth() + 1;
   let arr = [];
   for (let i = 0; i < num; i++) {
-    let lastMonth = i === 0 ? thisMonth : 12;
+    let lastMonth = (startYear === new Date().getFullYear() && i === 0) ? thisMonth : 12;
     for (let j = 1; j <= lastMonth; j++) {
-      arr.push(thisYear - i + j.toString().padStart(2, 0));
+      arr.push(startYear - i + j.toString().padStart(2, 0));
     }
   }
   return arr.join(',');

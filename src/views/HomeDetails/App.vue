@@ -6,7 +6,7 @@
     <div class="container-block">
       <!--头部标题区域-->
       <ns-block-head>
-        <template slot="main">近半年收入趋势</template>
+        <template slot="main">近一年收入趋势</template>
       </ns-block-head>
 
       <div class="manage-block__body">
@@ -58,24 +58,22 @@
       let search = location.search.slice(1);
       let params = qs.parse(search);
       this.departmentName = params.departmentName;
-      //获取半年营收
+      //获取一年营收
       this.getHalfYearIncome();
       this.getFeeCollectionRate();
     },
 
     methods: {
       refresh(){
-        if(this.global_year === new Date().getFullYear()){
-          this.getHalfYearIncome();
-          this.getFeeCollectionRate();
-        }
+        this.getHalfYearIncome();
+        this.getFeeCollectionRate();
       },
-      //近半年营收
+      //近一年营收
       getHalfYearIncome() {
         let key = '207';
         let params = [ this.getQueryByFactory({
           targetItemID: key,
-          date: getRecentlyMonth(6).join(','),
+          date: getFullYearMonth(this.global_year).join(','),
           repotyType: 3  //月份
         })];
         console.log('折线1',params)
@@ -91,7 +89,7 @@
       getFeeCollectionRate() {
         let key = '256';
         let thisYear = new Date().getFullYear();
-        let date = getFullYearMonth(thisYear).concat(getFullYearMonth(thisYear - 1));
+        let date = getFullYearMonth(this.global_year).concat(getFullYearMonth(this.global_year - 1));
         let params = [this.getQueryByFactory({
           targetItemID: key,
           date: date.join(','),

@@ -101,7 +101,7 @@ export default create({
         this.getQueryByFactory({
           targetItemID: line_requestId,
           repotyType: 3,
-          date: getAllMonths(2),
+          date: getAllMonths(2, this.global_year),
         }),
       ];
       console.log('折线图', params);
@@ -132,7 +132,7 @@ export default create({
       });
     },
     refresh() {
-      this.isCurrentYear && this.getLineChartData();
+      this.getLineChartData();
       this.getPieChartData();
     },
   },

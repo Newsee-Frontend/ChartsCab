@@ -78,9 +78,7 @@ export default create({
 
   methods: {
     refresh() {
-      if(this.global_year === new Date().getFullYear()){
-        this.getLineData();
-      }
+      this.getLineData();
     },
     
     changeSelect(val) {
@@ -114,7 +112,7 @@ export default create({
         return this.getQueryByFactory({
           targetItemID: i,
           repotyType: 3,
-          date: getAllMonths(2)
+          date: getAllMonths(2, this.global_year)
         })
       });
       console.log('折线图',params)
