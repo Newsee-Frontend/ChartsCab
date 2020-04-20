@@ -35,23 +35,21 @@ export const singleBoxDataHandle = (data, idList) => {
     const configure = controller[id][key];//获取控制器中对应的配置对象
 
     if (configure) {
-      const unitConvertVal = unitConvert(rawData, configure.main.unit);//数值单位转换
+      const unitConvertVal = unitConvert(rawData, configure.unit);//数值单位转换
       return {
         sub: configure.sub,
-        main: {
-          num: unitConvertVal.num,
-          unit: unitConvertVal.unit,
-        },
-        notes: (configure.notes || []).map(item => {
-          let mix = unitConvert(item.num, item.unit);
-          mix.num = 12.44;
-          configure.notes.length > 1 && (mix.num = mix.num.toFixed(0));
-          return {
-            compare: item.compare,
-            num: mix.num,
-            unit: mix.unit,
-          }
-        })
+        num: unitConvertVal.num,
+        unit: unitConvertVal.unit,
+        // notes: (configure.notes || []).map(item => {
+        //   let mix = unitConvert(item.num, item.unit);
+        //   mix.num = 12.44;
+        //   configure.notes.length > 1 && (mix.num = mix.num.toFixed(0));
+        //   return {
+        //     compare: item.compare,
+        //     num: mix.num,
+        //     unit: mix.unit,
+        //   }
+        // })
       };
 
     }

@@ -1,7 +1,7 @@
 <!--首页-->
 <template>
   <ns-layout :title="departmentName">
-    <ns-data-statistics class="container-block" :idList="idList"></ns-data-statistics>
+    <ns-data-statistics class="container-block" :idList="idList" :noteList="noteList"></ns-data-statistics>
     <ns-property-fee></ns-property-fee>
     <ns-revenue-chart></ns-revenue-chart>
     <ns-position-info
@@ -37,6 +37,14 @@ export default create({
         { id: '307', key: 'actualTarget' }, //项目数量
         { id: '14', key: 'actualTarget' }, //项目面积
         { id: '337', key: 'actualTarget' }, //储备面积
+      ],
+      noteList: [
+        {id: '207', type: '计划同比'},
+        {id: '207', type: '月度'},
+        {id: '80', type: '环比'},
+        {id: '307', type: '月度'},
+        {id: '14', type: '月度'},
+        {id: '337', type: '同比'},
       ],
       tabList: [
         { title: '营业完成金额', name: 'businessCompletionAmount' },

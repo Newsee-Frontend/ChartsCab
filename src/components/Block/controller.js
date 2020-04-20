@@ -2,211 +2,147 @@ export default {
   14: {
     actualTarget: {
       sub: '项目面积',
-      main: {
-        unit: 'area',
-      },
-      notes: [
-        {
-          compare: '较上年',
-          unit: 'area',
-        },
-      ],
+      unit: 'area',
     },
   },
   20: {
     actualTarget: {
       sub: '业主满意率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   22: {
     actualTarget: {
       sub: '督导完成合格率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   28: {
     actualDenominator: {
       sub: '计划巡检数量',
-      main: {
-        unit: 'count',
-      },
+      unit: 'count',
     },
     actualNumerator: {
       sub: '实际完成数量',
-      main: {
-        unit: 'count',
-      },
+      unit: 'count',
     },
     actualTarget: {
       sub: '完成率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   32: {
     actualDenominator: {
       sub: '计划巡检数量',
-      main: {
-        unit: 'count',
-      },
+      unit: 'count',
     },
     actualNumerator: {
       sub: '实际完成数量',
-      main: {
-        unit: 'count',
-      },
+      unit: 'count',
     },
     actualTarget: {
       sub: '完成率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   80: {
     actualDenominator: {
       sub: '计划总营收',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
     actualNumerator: {
       sub: '实际总营收',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
     actualTarget: {
       sub: '总营收完成率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   205: {
     actualTarget: {
       sub: '客户投诉数量',
-      main: {
-        unit: 'count',
-      },
+      unit: 'count',
     },
   },
   206: {
     actualTarget: {
       sub: '投诉完成率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   256: {
     actualDenominator: {
       sub: '物业费应收',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
     actualNumerator: {
       sub: '物业费实收',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
     actualTarget: {
       sub: '物业费收缴率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   266: {
     actualDenominator: {
       sub: '往年欠费',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
     actualNumerator: {
       sub: '往年欠收收缴',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
     actualTarget: {
       sub: '往年欠费收缴率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   275: {
     actualTarget: {
       sub: '本年欠收',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
   },
   283: {
     actualDenominator: {
       sub: '总员工数',
-      main: {
-        unit: 'person',
-      },
+      unit: 'person',
     },
     actualNumerator: {
       sub: '薪酬总支出',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
     actualTarget: {
       sub: '薪酬平均支出',
-      main: {
-        unit: 'num',
-      },
+      unit: 'num',
     },
   },
   285: {
     actualDenominator: {
       sub: '全部工单数',
-      main: {
-        unit: 'count',
-      },
+      unit: 'count',
     },
     actualNumerator: {
       sub: '完成总数',
-      main: {
-        unit: 'count',
-      },
+      unit: 'count',
     },
     actualTarget: {
       sub: '完成率',
-      main: {
-        unit: 'percent',
-      },
+      unit: 'percent',
     },
   },
   307: {
     actualTarget: {
       sub: '储备面积',
-      main: {
-        unit: 'count',
-      },
+      unit: 'count',
     },
   },
   337: {
     actualTarget: {
       sub: '计划总营收',
-      main: {
-        unit: 'area',
-      },
+      unit: 'area',
     },
   },
 };
