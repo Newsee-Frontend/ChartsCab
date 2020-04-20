@@ -1,13 +1,16 @@
 <template>
   <ns-popup v-model="showPicker"
-            position="right"
+            position="left"
             class="toggleProject"
   >
     <div class="header">
 
       <ns-nav-bar
         title="切换地区"
+        right-text="确定"
         left-arrow
+        @click-left="close"
+        @click-right="submitProject"
       />
     </div>
 
@@ -58,7 +61,7 @@
 
 <script>
   import create from '../../utils/core/create-basic';
-  import { Popup, TreeSelect, Search, NavBar } from 'vant';
+  import { Popup, TreeSelect, Search, NavBar,Toast } from 'vant';
 
   export default create({
     name: 'toggleProject',
@@ -79,7 +82,31 @@
 
     data() {
       return {
-        items: [
+        items: [],
+
+        activeIndex: 1,
+        activeId: undefined,
+        projectId: undefined,
+
+        projectList: [],
+        showPicker: false,
+
+        searchInput: '',
+        searching: false,
+        searchList: [],
+      };
+    },
+
+    watch: {
+      visible(val) {
+        this.showPicker = val;
+      },
+    },
+
+    methods: {
+      //add 自定义的 标签
+      addBlankTag(){
+        this.items = [
           {
             text: '浙江',
             id: 1,
@@ -151,51 +178,46 @@
             text: '江西',
             id: 9,
           },
-        ],
-
-        activeIndex: 1,
-        activeId: '',
-        projectId: '',
-
-        projectList: [],
-        showPicker: false,
-
-        searchInput: '',
-        searching: false,
-        searchList: [],
-      };
-    },
-
-    watch: {
-      visible(val) {
-        this.showPicker = val;
-        this.addBlankTag();
-      },
-    },
-
-    methods: {
-      //add 自定义的 标签
-      addBlankTag(){
-        this.items.unshift({ text: '全国', id: -1 });
-        console.log( this.items,11111);
+        ];
+        this.items.unshift({ text: '全国', id: '' });
+        this.items.forEach( item => {
+          if(item.children) {
+            item.children.unshift({ text: '全部', id: '' })
+          }
+        })
       },
 
       //菜单一级点击
       clickNav(index) {
-        this.activeId = '';
+         //一级是全国
+        this.activeId = undefined;
         this.projectList = [];
-        this.projectId = '';
+        this.projectId = undefined;
       },
 
       //菜单二级点击
       clickItem(data) {
-        this.projectList = data.children;
-        this.projectId = '';
+        //二级是全部
+        let list = data.children || [];
+        this.projectList = list.slice(0, list.length);
+        this.projectList.unshift({ text: '全部', id: '' });
+        this.projectId = undefined;
       },
 
       //项目区点击
       clickProject(data) {
+        //三级是全部
         this.projectId = data.id;
+        this.selectProject(data);
+      },
+
+      // 保存
+      submitProject(){
+        if(this.searching){
+          Toast('请选择需要切换的项目');
+        }else{
+          this.searchProjectList();
+        }
       },
 
 
@@ -227,11 +249,22 @@
        * search select
        */
       selectProject(data){
-         console.log(data);
-         this.showDialog = false;
-         this.$emit('update:visible', this.showDialog);
-      }
+        console.log(data);
+        console.log(111111111111111);
+        this.close();
+      },
+
+      close(){
+        // 数据还原
+        this.showPicker = false;
+        this.$emit('update:visible',  this.showPicker);
+        Object.assign(this.$data, this.$options.data.call(this), {items: this.$data.items});
+      },
     },
+
+    created(){
+      this.addBlankTag();
+    }
   });
 </script>
 
@@ -242,6 +275,15 @@
 
     .van-nav-bar .van-icon{
       color: #666666;
+    }
+
+    .van-sidebar-item--select{
+      color: #4F9BFF;
+      border-color: #4F9BFF;
+    }
+
+    .van-tree-select__item--active{
+      color: #4F9BFF;
     }
 
     .side-menu {
