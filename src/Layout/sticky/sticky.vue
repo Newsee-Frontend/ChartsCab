@@ -2,9 +2,9 @@
 <template>
   <ns-sticky :offset-top="offsetTop" :class="['ns-sticky', isStickyShow ? 'show' : 'hide']">
     <div class="sticky-wrapper clear">
-      <span class="fl">集团公司</span>
+      <span class="fl">{{title}}</span>
 
-      <div class="toggle fr">
+      <div class="toggle fr" @click="exchange">
         <ns-icon name="exchange" />
         切换
       </div>
@@ -27,6 +27,7 @@ export default create({
     return {
       scrollTop: 0,
       isStickyShow: false,
+      title: ''
     };
   },
   props: {
@@ -34,10 +35,11 @@ export default create({
   },
   mounted() {
     addEventHandler(window, 'scroll', this.handleScroll);
-
     this.$once('hook:beforeDestroy', () => {
       removeEventHandler(window, 'scroll');
     });
+
+    this.title = this.$store.state.Base.departmentName;
   },
   watch: {
     scrollTop(val) {
@@ -50,7 +52,12 @@ export default create({
         window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       // console.log(this.scrollTop);
     },
+
+    exchange(){
+      this.$emit('change')
+    }
   },
+
   beforeDestroy() {},
 });
 </script>

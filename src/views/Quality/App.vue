@@ -1,6 +1,6 @@
 <!--首页-->
 <template>
-  <ns-layout :title="departmentName">
+  <ns-layout>
     <ns-data-statistics class="container-block" columns="2" :idList="idList"></ns-data-statistics>
     <ns-block-head>
       <template #main>品质巡检信息</template>

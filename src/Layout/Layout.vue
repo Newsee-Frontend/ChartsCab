@@ -1,9 +1,13 @@
 <!--整体布局-->
 <template>
   <div id="app" class="layout">
-    <sticky></sticky>
+    <!--吸顶切换-->
+    <sticky @change="toggleProject"></sticky>
 
-    <div class="toggle"></div>
+    <!--项目切换组件-->
+    <toggle-project  :visible.sync="showProjectPopup"></toggle-project>
+
+    <div class="toggle" @click="toggleProject"></div>
     <div class="title">{{title}}</div>
     <div class="wrapper">
       <slot></slot>
@@ -13,18 +17,30 @@
 
 <script>
 import sticky from './sticky/sticky';
+import toggleProject from './toggleProject/toggleProject';
 
 export default {
   name: 'Layout',
-  props: {
-    title: ''
-  },
   components: {
     sticky,
+    toggleProject
   },
   data() {
-    return {};
+    return {
+      showProjectPopup: false,
+      title: '',
+    };
   },
+
+  methods: {
+    toggleProject(){
+      this.showProjectPopup = true;
+    }
+  },
+
+  mounted(){
+    this.title = this.$store.state.Base.departmentName;
+  }
 };
 </script>
 
