@@ -1,6 +1,6 @@
 <!--首页-->
 <template>
-  <ns-layout :title="departmentName">
+  <ns-layout>
     <ns-data-statistics class="container-block" :idList="idList"></ns-data-statistics>
     <ns-property-fee></ns-property-fee>
     <ns-revenue-chart></ns-revenue-chart>

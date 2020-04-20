@@ -5,7 +5,6 @@ import {getTime, deadline} from '../utils/library/time'
 export default {
   data() {
     return {
-      departmentName: '',
       deadline,
       nextLevelMap: {
         2: 1,
@@ -27,13 +26,9 @@ export default {
       this.refresh();
     }
   },
-
-  created(){
-    this.departmentName = getUrlParam('departmentName') || '移动管理驾驶舱';
-  },
   methods: {
     getUrlParam,
-    
+
     refresh(){},
 
     /**
@@ -48,9 +43,7 @@ export default {
     },
 
     createBaseQuery(isNext) {
-      // console.log(this.$store.state);
-      const targetLevel = getUrlParam('targetLevel') || 2;
-      const departmentID = getUrlParam('departmentID');
+      const { departmentID, targetLevel}  = this.$store.state.Base;
 
       const base = {
         targetItemID: '',

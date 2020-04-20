@@ -1,9 +1,8 @@
 <!--整体布局-->
 <template>
   <div id="app" class="layout">
-    <sticky></sticky>
-
-    <div class="toggle"></div>
+    <sticky @change="toggleProject"></sticky>
+    <div class="toggle" @click="toggleProject"></div>
     <div class="title">{{title}}</div>
     <div class="wrapper">
       <slot></slot>
@@ -17,14 +16,26 @@ import sticky from './sticky/sticky';
 export default {
   name: 'Layout',
   props: {
-    title: ''
+    title: '',
   },
   components: {
     sticky,
   },
   data() {
-    return {};
+    return {
+      showProjectPicker: false
+    };
   },
+
+  methods: {
+    toggleProject(){
+      this.showProjectPicker = true;
+    }
+  },
+
+  mounted(){
+    this.title = this.$store.state.Base.departmentName;
+  }
 };
 </script>
 

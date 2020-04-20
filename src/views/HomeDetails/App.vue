@@ -1,6 +1,6 @@
 <!--详情页-->
 <template>
-  <ns-layout :title="departmentName">
+  <ns-layout>
     <ns-data-statistics></ns-data-statistics>
 
     <div class="container-block">
