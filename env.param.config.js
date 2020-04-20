@@ -6,7 +6,7 @@ module.exports = {
     mode: 'MPA', //project mode
     assetsPublicPath: '/',
     port: 8500,
-    host: '0.0.0.0',
+    host: '192.168.6.182',
     useEslint: false,
     prescript: [],
     usepxtorem: true,
